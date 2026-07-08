@@ -1,0 +1,127 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import Link from "next/link";
+import PlasmaWave from "@/components/PlasmaWave";
+import Hero3D from "@/components/Hero3D";
+
+// Staggered entrance that stays visible without JS: SSR renders shown; the
+// client hides-then-reveals on mount so no-JS / crawlers still see the copy.
+function useEntrance() {
+  const [enhanced, setEnhanced] = useState(false);
+  const [shown, setShown] = useState(false);
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setShown(true);
+      return;
+    }
+    setEnhanced(true);
+    const r = requestAnimationFrame(() => setShown(true));
+    return () => cancelAnimationFrame(r);
+  }, []);
+  const step = (i: number) => {
+    const hidden = enhanced && !shown;
+    return {
+      opacity: hidden ? 0 : 1,
+      transform: hidden ? "translateY(20px)" : "none",
+      transition: `opacity 0.8s cubic-bezier(0.22,1,0.36,1) ${i * 0.09}s, transform 0.8s cubic-bezier(0.22,1,0.36,1) ${i * 0.09}s`,
+    } as const;
+  };
+  return step;
+}
+
+export default function Hero() {
+  const step = useEntrance();
+
+  return (
+    <section
+      id="home"
+      className="relative h-svh min-h-[640px] w-full overflow-hidden"
+    >
+      {/* Layer 1: recolored oxblood plasma */}
+      <div className="absolute inset-0">
+        <PlasmaWave
+          colors={["#5c0f16", "#c0392b"]}
+          speed1={0.065}
+          speed2={0.1}
+          focalLength={1.45}
+          bend1={1.1}
+          bend2={0.6}
+          dir2={1}
+          rotationDeg={30}
+        />
+      </div>
+
+      {/* Layer 2: the 3D monolith */}
+      <Hero3D />
+
+      {/* Legibility scrims — radial behind copy + bottom blend into page */}
+      <div
+        aria-hidden
+        className="absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(120% 90% at 50% 62%, transparent 24%, oklch(0.15 0.006 25 / 0.55) 62%, oklch(0.15 0.006 25 / 0.8) 100%)",
+        }}
+      />
+      <div
+        aria-hidden
+        className="absolute inset-x-0 bottom-0 h-48"
+        style={{
+          background:
+            "linear-gradient(to bottom, transparent, oklch(0.15 0.006 25))",
+        }}
+      />
+
+      {/* Copy */}
+      <div className="relative z-20 mx-auto flex h-full max-w-4xl flex-col items-center justify-center px-6 text-center">
+        <p
+          style={step(0)}
+          className="font-mono text-xs uppercase tracking-[0.28em] text-ember sm:text-sm"
+        >
+          Full-stack webfejlesztő
+        </p>
+        <h1
+          style={step(1)}
+          className="mt-5 font-display text-6xl font-medium leading-[0.95] tracking-[-0.02em] text-foreground sm:text-7xl md:text-8xl"
+        >
+          Bence Szalai
+        </h1>
+        <p
+          style={step(2)}
+          className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground sm:text-xl"
+        >
+          Prémium, egyedi weboldalak, amelyek a vállalkozásodért dolgoznak — a
+          megjelenéstől a betöltési sebességig kézműves minőségben.
+        </p>
+        <div
+          style={step(3)}
+          className="mt-10 flex flex-col items-center gap-4 sm:flex-row"
+        >
+          <Link
+            href="#contact"
+            className="focus-ember inline-flex items-center justify-center rounded-full bg-primary px-7 py-3.5 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/30 transition-all duration-300 hover:shadow-xl hover:shadow-primary/40 hover:brightness-110"
+          >
+            Beszéljünk a projektedről
+          </Link>
+          <Link
+            href="#projects"
+            className="focus-ember inline-flex items-center justify-center rounded-full border border-border px-7 py-3.5 text-sm font-medium text-foreground transition-colors duration-300 hover:border-ember hover:text-ember"
+          >
+            Projektek megtekintése
+          </Link>
+        </div>
+      </div>
+
+      {/* Scroll hint */}
+      <div
+        aria-hidden
+        className="absolute inset-x-0 bottom-6 z-20 flex justify-center"
+      >
+        <span className="font-mono text-[0.65rem] uppercase tracking-[0.3em] text-muted-foreground/70">
+          Görgess
+        </span>
+      </div>
+    </section>
+  );
+}
