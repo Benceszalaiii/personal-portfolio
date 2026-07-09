@@ -92,8 +92,8 @@ export default async function SolitaCafePage({
 }) {
   const key = (await searchParams).key;
   let hasKey;
-  if (key) {
-    hasKey = key === "ecfd398b-fdf0-45df-8e13-925aef5e8b2c";
+  if (key && process.env.SOLITA_KEY) {
+    hasKey = key === process.env.SOLITA_KEY;
   } else {
     hasKey = false;
   }
