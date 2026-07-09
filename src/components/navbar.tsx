@@ -14,31 +14,31 @@ export default function Navbar() {
       items={[
         {
           label: "Kezdőlap",
-          href: "#home",
+          href: "/#home",
           rotation: 8,
           hoverStyles: { bgColor: "oklch(0.52 0.17 25)", textColor: "#fff" },
         },
         {
           label: "Szolgáltatások",
-          href: "#features",
+          href: "/#features",
           rotation: -8,
           hoverStyles: { bgColor: "oklch(0.46 0.15 26)", textColor: "#fff" },
         },
         {
           label: "Rólam",
-          href: "#about",
+          href: "/#about",
           rotation: 4,
           hoverStyles: { bgColor: "oklch(0.58 0.18 30)", textColor: "#fff" },
         },
         {
           label: "Projektek",
-          href: "#projects",
+          href: "/#projects",
           rotation: -6,
           hoverStyles: { bgColor: "oklch(0.5 0.16 24)", textColor: "#fff" },
         },
         {
           label: "Kapcsolat",
-          href: "#contact",
+          href: "/#contact",
           rotation: 6,
           hoverStyles: { bgColor: "oklch(0.62 0.19 32)", textColor: "#fff" },
         },
