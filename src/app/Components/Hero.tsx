@@ -1,9 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import PlasmaWave from "@/components/PlasmaWave";
-import Hero3D from "@/components/Hero3D";
+import { useThemeColors } from "@/lib/theme-color";
 
 // Staggered entrance that stays visible without JS: SSR renders shown; the
 // client hides-then-reveals on mount so no-JS / crawlers still see the copy.
@@ -32,6 +32,12 @@ function useEntrance() {
 
 export default function Hero() {
   const step = useEntrance();
+  // theme-derived plasma palette (WebGL needs concrete hex, not var());
+  // PlasmaWave re-reads its colors prop every frame, so this updates live
+  const plasma = useThemeColors({
+    deep: { css: "var(--plasma-deep)", fallback: "#5c0f16" },
+    bright: { css: "var(--plasma-bright)", fallback: "#c0392b" },
+  });
 
   return (
     <section
@@ -41,7 +47,7 @@ export default function Hero() {
       {/* Layer 1: recolored oxblood plasma */}
       <div className="absolute inset-0">
         <PlasmaWave
-          colors={["#5c0f16", "#c0392b"]}
+          colors={[plasma.deep, plasma.bright]}
           speed1={0.065}
           speed2={0.1}
           focalLength={1.45}
@@ -52,24 +58,33 @@ export default function Hero() {
         />
       </div>
 
-      {/* Layer 2: the 3D monolith */}
-      <Hero3D />
-
-      {/* Legibility scrims — radial behind copy + bottom blend into page */}
+      {/* Layer 2: soft oxblood core glow under the monolith (the 3D canvas
+          itself lives in the page-level ScrollScene layer, z-10) */}
       <div
         aria-hidden
-        className="absolute inset-0"
+        className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "radial-gradient(120% 90% at 50% 62%, transparent 24%, oklch(0.15 0.006 25 / 0.55) 62%, oklch(0.15 0.006 25 / 0.8) 100%)",
+            "radial-gradient(closest-side at 50% 48%, color-mix(in oklab, var(--hero-glow) 55%, transparent), transparent 70%)",
+        }}
+      />
+
+      {/* Legibility scrims — radial behind copy + bottom blend into page.
+          z-[11]: above the traveling canvas so the hero keeps its vignette. */}
+      <div
+        aria-hidden
+        className="absolute inset-0 z-[11]"
+        style={{
+          background:
+            "radial-gradient(120% 90% at 50% 62%, transparent 24%, color-mix(in oklab, var(--background) 55%, transparent) 62%, color-mix(in oklab, var(--background) 80%, transparent) 100%)",
         }}
       />
       <div
         aria-hidden
-        className="absolute inset-x-0 bottom-0 h-48"
+        className="absolute inset-x-0 bottom-0 z-[11] h-48"
         style={{
           background:
-            "linear-gradient(to bottom, transparent, oklch(0.15 0.006 25))",
+            "linear-gradient(to bottom, transparent, var(--background))",
         }}
       />
 

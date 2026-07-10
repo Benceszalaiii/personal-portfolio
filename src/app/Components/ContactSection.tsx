@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
 import Link from "next/link";
+import { type FormEvent, useState } from "react";
 import Reveal from "@/components/motion/Reveal";
 
 type Status = "idle" | "submitting" | "success" | "error";
@@ -10,7 +10,8 @@ const isEmail = (v: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
 
 const field =
   "w-full rounded-lg border border-input bg-card px-4 py-3 text-base text-foreground placeholder:text-muted-foreground/70 outline-none transition-colors focus-visible:border-ember focus-visible:ring-2 focus-visible:ring-ring/50";
-const label = "font-mono text-xs uppercase tracking-[0.15em] text-muted-foreground";
+const label =
+  "font-mono text-xs uppercase tracking-[0.15em] text-muted-foreground";
 
 export default function ContactSection() {
   const [status, setStatus] = useState<Status>("idle");
@@ -62,7 +63,7 @@ export default function ContactSection() {
       id="contact"
       className="relative w-full px-4 py-24 md:px-16 md:py-32"
     >
-      <div className="mx-auto grid max-w-6xl gap-12 md:grid-cols-2 md:gap-16">
+      <div className="relative z-20 mx-auto grid max-w-6xl gap-12 md:grid-cols-2 md:gap-16">
         {/* Left: the pitch */}
         <Reveal>
           <p className="font-mono text-xs uppercase tracking-[0.2em] text-ember">
@@ -91,6 +92,13 @@ export default function ContactSection() {
               github.com/benceszalaiii
             </Link>
           </div>
+          {/* stage-cta: empty in-flow stage under the links where the
+              monolith comes to rest at the end of its journey */}
+          <div
+            id="stage-cta"
+            aria-hidden
+            className="mt-16 hidden h-40 md:block"
+          />
         </Reveal>
 
         {/* Right: the form */}
@@ -121,7 +129,11 @@ export default function ContactSection() {
               </button>
             </div>
           ) : (
-            <form onSubmit={onSubmit} noValidate className="flex flex-col gap-5">
+            <form
+              onSubmit={onSubmit}
+              noValidate
+              className="flex flex-col gap-5"
+            >
               <div className="flex flex-col gap-2">
                 <label htmlFor="name" className={label}>
                   Neved

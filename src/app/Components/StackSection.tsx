@@ -5,8 +5,10 @@ const panel = {
   container:
     "h-full w-full rounded-2xl border border-border bg-card p-8 md:p-12 relative overflow-hidden",
   tag: "font-mono text-xs uppercase tracking-[0.2em] text-ember",
-  title: "font-display text-2xl md:text-4xl font-medium mt-4 mb-5 text-foreground",
-  content: "text-base md:text-lg leading-relaxed text-muted-foreground max-w-[60ch]",
+  title:
+    "font-display text-2xl md:text-4xl font-medium mt-4 mb-5 text-foreground",
+  content:
+    "text-base md:text-lg leading-relaxed text-muted-foreground max-w-[60ch]",
 };
 
 const features = [
@@ -39,7 +41,7 @@ export default function StackSection() {
       id="features"
       className="relative w-full px-4 py-24 md:px-16 md:py-32"
     >
-      <div className="mx-auto max-w-6xl">
+      <div className="relative z-20 mx-auto max-w-6xl">
         <p className="font-mono text-xs uppercase tracking-[0.2em] text-ember">
           Amit kínálok
         </p>
@@ -48,7 +50,12 @@ export default function StackSection() {
         </h2>
       </div>
 
-      <div className="mx-auto mt-16 h-[26rem] max-w-3xl md:h-[24rem]">
+      {/* stage-features: measured by ScrollScene — the monolith settles in the
+          gutter left of this panel on desktop */}
+      <div
+        id="stage-features"
+        className="relative z-20 mx-auto mt-16 h-[26rem] max-w-3xl md:h-[24rem]"
+      >
         <Tabs
           activeTabClassName="bg-secondary border border-border"
           tabClassName="text-sm md:text-base font-mono font-medium px-5 py-2 text-muted-foreground"
@@ -63,7 +70,7 @@ export default function StackSection() {
                   className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full"
                   style={{
                     background:
-                      "radial-gradient(closest-side, oklch(0.55 0.16 28 / 0.22), transparent)",
+                      "radial-gradient(closest-side, color-mix(in oklab, var(--ember-soft) 22%, transparent), transparent)",
                   }}
                 />
                 <p className={cn(panel.tag)}>{f.tag}</p>

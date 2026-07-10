@@ -13,6 +13,7 @@
   --font-heading: var(--font-bodoni);
   --color-ember: var(--ember);
   --color-ember-soft: var(--ember-soft);
+  --color-brand-faint: var(--brand-faint);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -56,6 +57,13 @@
   Dark-only: <html> ships with the `dark` class, so :root and .dark carry the
   same committed values (no light mode). Surfaces get depth from lightness, not
   shadow; neutrals are tinted toward the brand hue for cohesion.
+
+  ── THEMING / tweakcn ─────────────────────────────────────────────────────
+  This block is the standard shadcn token set: to re-skin the site, replace it
+  with any tweakcn (tweakcn.com) theme's :root/.dark blocks. Every other color
+  on the site — hero plasma, the 3D monolith's lights and metal, gradients,
+  the navbar bubbles — derives from these tokens (see the "derived tokens"
+  section below), so a palette swap re-themes the WebGL scenes too.
 */
 :root,
 .dark {
@@ -107,6 +115,62 @@
   --sidebar-ring: oklch(0.55 0.17 27);
 }
 
+/*
+  ── Derived tokens ────────────────────────────────────────────────────────
+  Static fallbacks first (they match the default oxblood palette exactly);
+  browsers with CSS relative color syntax re-derive everything from the
+  shadcn tokens above, so swapping in a tweakcn palette re-themes the
+  accents, the hero plasma and the 3D monolith in one move. The WebGL code
+  reads the --scene- and --plasma- tokens at runtime via src/lib/theme-color.ts.
+*/
+:root,
+.dark {
+  --brand-faint: oklch(0.4 0.09 27);
+
+  /* 3D monolith rig (ScrollScene) */
+  --scene-rim: #b02a2e;
+  --scene-key: #e0623a;
+  --scene-fill: #ffd9c0;
+  --scene-body: #1c1113;
+  --scene-env: #0b0708;
+
+  /* hero backdrop */
+  --hero-glow: oklch(0.42 0.14 28);
+  --plasma-deep: #5c0f16;
+  --plasma-bright: #c0392b;
+}
+
+@supports (color: oklch(from red l c h)) {
+  :root,
+  .dark {
+    --ember: oklch(
+      from var(--primary) calc(l + 0.16) calc(c + 0.01) calc(h + 7)
+    );
+    --ember-soft: oklch(
+      from var(--primary) calc(l + 0.06) calc(c - 0.01) calc(h + 3)
+    );
+    --brand-faint: oklch(
+      from var(--primary) calc(l - 0.12) calc(c - 0.08) calc(h + 2)
+    );
+
+    --scene-rim: oklch(from var(--primary) l calc(c + 0.03) calc(h + 2));
+    --scene-key: var(--ember);
+    --scene-fill: oklch(from var(--primary) 0.91 0.05 calc(h + 30));
+    --scene-body: oklch(from var(--primary) 0.17 0.015 calc(h - 8));
+    --scene-env: oklch(
+      from var(--background) calc(l - 0.04) calc(c + 0.004) calc(h - 5)
+    );
+
+    --hero-glow: oklch(
+      from var(--primary) calc(l - 0.1) calc(c - 0.03) calc(h + 3)
+    );
+    --plasma-deep: oklch(
+      from var(--primary) calc(l - 0.22) calc(c - 0.05) calc(h - 8)
+    );
+    --plasma-bright: oklch(from var(--primary) calc(l + 0.03) c calc(h + 4));
+  }
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -124,7 +188,9 @@
     @apply font-sans;
   }
 
-  h1, h2, h3 {
+  h1,
+  h2,
+  h3 {
     text-wrap: balance;
   }
 
@@ -156,12 +222,22 @@
     left: 0;
     right: 0;
     height: 1px;
+    /* literal fallback, then the token-derived version where supported */
     background: linear-gradient(
       90deg,
       transparent 0%,
       oklch(0.4 0.12 27 / 0.55) 22%,
       oklch(0.6 0.17 30 / 0.85) 50%,
       oklch(0.4 0.12 27 / 0.55) 78%,
+      transparent 100%
+    );
+    /* biome-ignore lint/suspicious/noDuplicateProperties: progressive-enhancement fallback chain */
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      color-mix(in oklab, var(--brand-faint) 55%, transparent) 22%,
+      color-mix(in oklab, var(--ember-soft) 85%, transparent) 50%,
+      color-mix(in oklab, var(--brand-faint) 55%, transparent) 78%,
       transparent 100%
     );
     pointer-events: none;

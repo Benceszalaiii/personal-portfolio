@@ -1,30 +1,25 @@
 {
   "communities": {
     "0": [
-      "src_components_ui_morphing_dialog",
-      "src_components_ui_morphing_dialog_morphingdialog",
+      "src_app_components_stacksection",
+      "src_app_components_stacksection_stacksection",
+      "src_app_components_stacksection_tabs",
+      "src_app_page",
+      "src_app_page_home",
+      "src_app_page_project",
+      "src_components_gradienttext",
+      "src_components_gradienttext_gradienttext",
+      "src_components_gradienttext_gradienttextprops",
+      "src_components_navbar",
+      "src_components_navbar_navbar",
       "src_components_ui_morphing_dialog_morphingdialogclose",
-      "src_components_ui_morphing_dialog_morphingdialogcloseprops",
       "src_components_ui_morphing_dialog_morphingdialogcontainer",
-      "src_components_ui_morphing_dialog_morphingdialogcontainerprops",
       "src_components_ui_morphing_dialog_morphingdialogcontent",
-      "src_components_ui_morphing_dialog_morphingdialogcontentprops",
-      "src_components_ui_morphing_dialog_morphingdialogcontext",
-      "src_components_ui_morphing_dialog_morphingdialogcontextvalue",
       "src_components_ui_morphing_dialog_morphingdialogdescription",
-      "src_components_ui_morphing_dialog_morphingdialogdescriptionprops",
       "src_components_ui_morphing_dialog_morphingdialogimage",
-      "src_components_ui_morphing_dialog_morphingdialogimageprops",
-      "src_components_ui_morphing_dialog_morphingdialogprops",
       "src_components_ui_morphing_dialog_morphingdialogsubtitle",
-      "src_components_ui_morphing_dialog_morphingdialogsubtitleprops",
       "src_components_ui_morphing_dialog_morphingdialogtitle",
-      "src_components_ui_morphing_dialog_morphingdialogtitleprops",
       "src_components_ui_morphing_dialog_morphingdialogtrigger",
-      "src_components_ui_morphing_dialog_morphingdialogtriggerprops",
-      "src_components_ui_morphing_dialog_prefersreducedmotion",
-      "src_components_ui_morphing_dialog_settransitionnames",
-      "src_components_ui_morphing_dialog_transition",
       "src_components_ui_morphing_dialog_usemorphingdialog",
       "src_components_ui_tabs",
       "src_components_ui_tabs_fadeindiv",
@@ -54,12 +49,6 @@
       "components_rtl",
       "components_schema",
       "components_style",
-      "components_tailwind",
-      "components_tailwind_basecolor",
-      "components_tailwind_config",
-      "components_tailwind_css",
-      "components_tailwind_cssvariables",
-      "components_tailwind_prefix",
       "components_tsx"
     ],
     "2": [
@@ -76,12 +65,8 @@
       "package_dependencies_radix_ui_react_tabs",
       "package_dependencies_react",
       "package_dependencies_react_dom",
-      "package_dependencies_react_three_drei",
-      "package_dependencies_react_three_fiber",
-      "package_dependencies_resend",
       "package_dependencies_shadcn",
       "package_dependencies_tailwind_merge",
-      "package_dependencies_three",
       "package_dependencies_tw_animate_css",
       "src_components_scrollstack",
       "src_components_scrollstack_scrollstack",
@@ -90,32 +75,6 @@
       "src_components_scrollstack_scrollstackprops"
     ],
     "3": [
-      "src_app_components_contactsection",
-      "src_app_components_contactsection_contactsection",
-      "src_app_components_contactsection_isemail",
-      "src_app_components_contactsection_status",
-      "src_app_components_stacksection",
-      "src_app_components_stacksection_features",
-      "src_app_components_stacksection_panel",
-      "src_app_components_stacksection_stacksection",
-      "src_app_page",
-      "src_app_page_home",
-      "src_app_page_project",
-      "src_app_page_projects",
-      "src_app_solita_cafe_page",
-      "src_app_solita_cafe_page_brandswatches",
-      "src_app_solita_cafe_page_feature",
-      "src_app_solita_cafe_page_features",
-      "src_app_solita_cafe_page_generatemetadata",
-      "src_app_solita_cafe_page_solitacafepage",
-      "src_app_solita_cafe_page_stack",
-      "src_components_curvedloop",
-      "src_components_curvedloop_curvedloop",
-      "src_components_curvedloop_curvedloopprops",
-      "src_components_motion_reveal",
-      "src_components_motion_reveal_reveal"
-    ],
-    "4": [
       "package",
       "package_devdependencies",
       "package_devdependencies_biomejs_biome",
@@ -124,7 +83,6 @@
       "package_devdependencies_types_node",
       "package_devdependencies_types_react",
       "package_devdependencies_types_react_dom",
-      "package_devdependencies_types_three",
       "package_devdependencies_typescript",
       "package_ignorescripts",
       "package_name",
@@ -138,7 +96,7 @@
       "package_trusteddependencies",
       "package_version"
     ],
-    "5": [
+    "4": [
       "tsconfig",
       "tsconfig_compileroptions",
       "tsconfig_compileroptions_allowjs",
@@ -160,7 +118,7 @@
       "tsconfig_include",
       "tsconfig_paths"
     ],
-    "6": [
+    "5": [
       "biome",
       "biome_actions_source",
       "biome_assist",
@@ -179,6 +137,24 @@
       "biome_vcs_enabled",
       "biome_vcs_useignorefile"
     ],
+    "6": [
+      "src_components_ui_morphing_dialog",
+      "src_components_ui_morphing_dialog_morphingdialog",
+      "src_components_ui_morphing_dialog_morphingdialogcloseprops",
+      "src_components_ui_morphing_dialog_morphingdialogcontainerprops",
+      "src_components_ui_morphing_dialog_morphingdialogcontentprops",
+      "src_components_ui_morphing_dialog_morphingdialogcontext",
+      "src_components_ui_morphing_dialog_morphingdialogcontextvalue",
+      "src_components_ui_morphing_dialog_morphingdialogdescriptionprops",
+      "src_components_ui_morphing_dialog_morphingdialogimageprops",
+      "src_components_ui_morphing_dialog_morphingdialogprops",
+      "src_components_ui_morphing_dialog_morphingdialogsubtitleprops",
+      "src_components_ui_morphing_dialog_morphingdialogtitleprops",
+      "src_components_ui_morphing_dialog_morphingdialogtriggerprops",
+      "src_components_ui_morphing_dialog_prefersreducedmotion",
+      "src_components_ui_morphing_dialog_settransitionnames",
+      "src_components_ui_morphing_dialog_transition"
+    ],
     "7": [
       "biome_domains_next",
       "biome_domains_react",
@@ -191,23 +167,19 @@
       "biome_suspicious_nounknownatrules"
     ],
     "8": [
+      "components_tailwind",
+      "components_tailwind_basecolor",
+      "components_tailwind_config",
+      "components_tailwind_css",
+      "components_tailwind_cssvariables",
+      "components_tailwind_prefix"
+    ],
+    "9": [
       "src_app_layout",
-      "src_app_layout_bodoni",
       "src_app_layout_geistmono",
       "src_app_layout_geistsans",
       "src_app_layout_metadata",
-      "src_app_layout_rootlayout",
-      "src_components_navbar",
-      "src_components_navbar_navbar"
-    ],
-    "9": [
-      "src_app_components_hero",
-      "src_app_components_hero_hero",
-      "src_app_components_hero_useentrance",
-      "src_components_hero3d_index",
-      "src_components_hero3d_index_hero3d",
-      "src_components_hero3d_index_heroscene",
-      "src_components_hero3d_index_usereducedmotion"
+      "src_app_layout_rootlayout"
     ],
     "10": [
       "src_components_bubblemenu",
@@ -217,74 +189,59 @@
       "src_components_bubblemenu_menuitem"
     ],
     "11": [
-      "src_components_hero3d_scene",
-      "src_components_hero3d_scene_heroscene",
-      "src_components_hero3d_scene_monolith",
-      "src_components_hero3d_scene_rig",
-      "src_components_hero3d_scene_warmup"
-    ],
-    "12": [
-      "src_app_api_contact_route",
-      "src_app_api_contact_route_isemail",
-      "src_app_api_contact_route_post",
-      "src_app_api_contact_route_resend"
-    ],
-    "13": [
       "src_components_decryptedtext",
       "src_components_decryptedtext_decryptedtext",
       "src_components_decryptedtext_decryptedtextprops",
       "src_components_decryptedtext_direction"
     ],
-    "14": [
+    "12": [
       "src_components_plasmawave",
       "src_components_plasmawave_hextorgb",
       "src_components_plasmawave_plasmawave",
       "src_components_plasmawave_plasmawaveprops"
     ],
-    "15": [
-      "src_components_gradienttext",
-      "src_components_gradienttext_gradienttext",
-      "src_components_gradienttext_gradienttextprops"
+    "13": [
+      "src_components_curvedloop",
+      "src_components_curvedloop_curvedloop",
+      "src_components_curvedloop_curvedloopprops"
     ],
-    "16": [
+    "14": [
       "next_config",
       "next_config_nextconfig"
     ],
-    "17": [
+    "15": [
       "postcss_config",
       "postcss_config_config"
     ]
   },
   "cohesion": {
-    "0": 0.1053763440860215,
-    "1": 0.07407407407407407,
-    "2": 0.08,
-    "3": 0.09782608695652174,
-    "4": 0.09523809523809523,
-    "5": 0.1,
-    "6": 0.11764705882352941,
+    "0": 0.1476923076923077,
+    "1": 0.09523809523809523,
+    "2": 0.09523809523809523,
+    "3": 0.1,
+    "4": 0.1,
+    "5": 0.11764705882352941,
+    "6": 0.15833333333333333,
     "7": 0.2222222222222222,
-    "8": 0.2857142857142857,
-    "9": 0.38095238095238093,
+    "8": 0.3333333333333333,
+    "9": 0.4,
     "10": 0.4,
-    "11": 0.4,
+    "11": 0.5,
     "12": 0.6666666666666666,
-    "13": 0.5,
-    "14": 0.6666666666666666,
-    "15": 0.6666666666666666,
-    "16": 1.0,
-    "17": 1.0
+    "13": 0.6666666666666666,
+    "14": 1.0,
+    "15": 1.0
   },
   "gods": [
+    {
+      "id": "src_lib_utils_cn",
+      "label": "cn()",
+      "degree": 18
+    },
     {
       "id": "tsconfig_compileroptions",
       "label": "compilerOptions",
       "degree": 16
-    },
-    {
-      "id": "src_lib_utils_cn",
-      "label": "cn()",
-      "degree": 13
     },
     {
       "id": "components_registries",
@@ -322,8 +279,8 @@
       "degree": 4
     },
     {
-      "id": "src_components_motion_reveal_reveal",
-      "label": "Reveal()",
+      "id": "src_components_ui_morphing_dialog_morphingdialog",
+      "label": "MorphingDialog()",
       "degree": 4
     }
   ],
@@ -340,40 +297,40 @@
       "why": "connects across different repos/directories"
     },
     {
-      "source": "MorphingDialogContent()",
+      "source": "Home()",
       "target": "cn()",
       "source_files": [
-        "src/components/ui/morphing-dialog.tsx",
+        "src/app/page.tsx",
         "src/lib/utils.ts"
       ],
       "confidence": "EXTRACTED",
       "relation": "calls",
-      "why": "peripheral node `MorphingDialogContent()` unexpectedly reaches hub `cn()`"
+      "why": "peripheral node `Home()` unexpectedly reaches hub `cn()`"
     },
     {
-      "source": "MorphingDialogImage()",
+      "source": "FadeInDiv()",
       "target": "cn()",
       "source_files": [
-        "src/components/ui/morphing-dialog.tsx",
+        "src/components/ui/tabs.tsx",
         "src/lib/utils.ts"
       ],
       "confidence": "EXTRACTED",
       "relation": "calls",
-      "why": "peripheral node `MorphingDialogImage()` unexpectedly reaches hub `cn()`"
+      "why": "peripheral node `FadeInDiv()` unexpectedly reaches hub `cn()`"
     },
     {
-      "source": "MorphingDialogTitle()",
+      "source": "StackSection()",
       "target": "cn()",
       "source_files": [
-        "src/components/ui/morphing-dialog.tsx",
+        "src/app/Components/StackSection.tsx",
         "src/lib/utils.ts"
       ],
       "confidence": "EXTRACTED",
       "relation": "calls",
-      "why": "peripheral node `MorphingDialogTitle()` unexpectedly reaches hub `cn()`"
+      "why": "cross-file semantic connection"
     },
     {
-      "source": "MorphingDialogSubtitle()",
+      "source": "MorphingDialogTrigger()",
       "target": "cn()",
       "source_files": [
         "src/components/ui/morphing-dialog.tsx",
@@ -381,11 +338,44 @@
       ],
       "confidence": "EXTRACTED",
       "relation": "calls",
-      "why": "peripheral node `MorphingDialogSubtitle()` unexpectedly reaches hub `cn()`"
+      "why": "cross-file semantic connection"
     }
   ],
-  "tokens": {
-    "input": 0,
-    "output": 0
-  }
+  "questions": [
+    {
+      "type": "bridge_node",
+      "question": "Why does `dependencies` connect `dependencies` to `package.json`?",
+      "why": "High betweenness centrality (0.169) - this node is a cross-community bridge."
+    },
+    {
+      "type": "isolated_nodes",
+      "question": "What connects `$schema`, `enabled`, `clientKind` to the rest of the system?",
+      "why": "115 weakly-connected nodes found - possible documentation gaps or missing edges."
+    },
+    {
+      "type": "low_cohesion",
+      "question": "Should `page.tsx` be split into smaller, more focused modules?",
+      "why": "Cohesion score 0.1476923076923077 - nodes in this community are weakly interconnected."
+    },
+    {
+      "type": "low_cohesion",
+      "question": "Should `components.json` be split into smaller, more focused modules?",
+      "why": "Cohesion score 0.09523809523809523 - nodes in this community are weakly interconnected."
+    },
+    {
+      "type": "low_cohesion",
+      "question": "Should `dependencies` be split into smaller, more focused modules?",
+      "why": "Cohesion score 0.09523809523809523 - nodes in this community are weakly interconnected."
+    },
+    {
+      "type": "low_cohesion",
+      "question": "Should `package.json` be split into smaller, more focused modules?",
+      "why": "Cohesion score 0.1 - nodes in this community are weakly interconnected."
+    },
+    {
+      "type": "low_cohesion",
+      "question": "Should `compilerOptions` be split into smaller, more focused modules?",
+      "why": "Cohesion score 0.1 - nodes in this community are weakly interconnected."
+    }
+  ]
 }

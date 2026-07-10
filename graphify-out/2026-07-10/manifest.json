@@ -30,18 +30,18 @@
     "semantic_hash": "239f3ebf717465dc636818a1a619398d"
   },
   "src/app/Components/StackSection.tsx": {
-    "mtime": 1783646153.358382,
-    "ast_hash": "91014d5caa982762514b20c5c57f5d75",
+    "mtime": 1783645448.923185,
+    "ast_hash": "48c655ce55cccaaf5c8b31d18c70b289",
     "semantic_hash": ""
   },
   "src/app/layout.tsx": {
-    "mtime": 1783646353.1941721,
-    "ast_hash": "aed821738083c9ddcccbe8cb9b0f9352",
-    "semantic_hash": ""
+    "mtime": 1783526744.9921598,
+    "ast_hash": "ad35b2f08413ef14cdedbdfb087cdba5",
+    "semantic_hash": "ad35b2f08413ef14cdedbdfb087cdba5"
   },
   "src/app/page.tsx": {
-    "mtime": 1783646154.6043181,
-    "ast_hash": "f62a8b83d2f27300e0428824b2d129e3",
+    "mtime": 1783645448.9215379,
+    "ast_hash": "e944ec7bdf378f8a447305f4c268bac6",
     "semantic_hash": ""
   },
   "src/components/BubbleMenu.tsx": {
@@ -75,9 +75,9 @@
     "semantic_hash": "b40ccfc45e83ea3e82d8e2215e008c4d"
   },
   "src/components/navbar.tsx": {
-    "mtime": 1783646177.9306984,
-    "ast_hash": "014bb52a614ea59fbbd1bcb57d4acfb2",
-    "semantic_hash": ""
+    "mtime": 1783526755.4028685,
+    "ast_hash": "09ede639916e65d8326acd1df1537632",
+    "semantic_hash": "09ede639916e65d8326acd1df1537632"
   },
   "src/components/ui/morphing-dialog.tsx": {
     "mtime": 1776385141.7024262,
@@ -100,8 +100,8 @@
     "semantic_hash": "ee17fd1c97c735e9f3564e3f5251f125"
   },
   ".impeccable/hook.cache.json": {
-    "mtime": 1783646246.164626,
-    "ast_hash": "946f209ac2981f7b24047f500a40b7e8",
+    "mtime": 1783645355.4534695,
+    "ast_hash": "af43178597987f0c36554159d7362484",
     "semantic_hash": ""
   },
   ".impeccable/live/config.json": {
@@ -115,8 +115,8 @@
     "semantic_hash": ""
   },
   "src/app/Components/Hero.tsx": {
-    "mtime": 1783646144.141517,
-    "ast_hash": "bb5875a9fe9da34ff1ee0eb56c817a1c",
+    "mtime": 1783645448.9137664,
+    "ast_hash": "7074877c2b40d083a450ba6f709bbc12",
     "semantic_hash": ""
   },
   "src/app/api/contact/route.ts": {
@@ -140,8 +140,8 @@
     "semantic_hash": ""
   },
   "src/components/ScrollScene/TravelingScene.tsx": {
-    "mtime": 1783646245.7945843,
-    "ast_hash": "95de0491e1fee45301b0c36daa966133",
+    "mtime": 1783645448.9314458,
+    "ast_hash": "abac08b068e8ec32cb53654590969e38",
     "semantic_hash": ""
   },
   "src/components/ScrollScene/index.tsx": {
@@ -157,11 +157,6 @@
   "src/components/ScrollScene/scene-state.ts": {
     "mtime": 1783645186.375899,
     "ast_hash": "4fd336db8d36fe8f0cd324fd8861325f",
-    "semantic_hash": ""
-  },
-  "src/lib/theme-color.ts": {
-    "mtime": 1783646219.688144,
-    "ast_hash": "3d4c8214854dc94aa5a3328ec5772ccf",
     "semantic_hash": ""
   }
 }
