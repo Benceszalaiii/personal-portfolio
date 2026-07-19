@@ -13,13 +13,7 @@
     turns forward — no rewinding between sections.
 */
 
-export type SceneId =
-  | "hero"
-  | "features"
-  | "loop"
-  | "about"
-  | "projects"
-  | "cta";
+export type SceneId = "hero" | "features" | "loop" | "about" | "cta";
 
 export type PoseAlign =
   | "viewport-center" // ignore the anchor, center of the viewport
@@ -50,8 +44,8 @@ export type ScenePose = {
 /*
   Desktop (≥1024px): the full editorial choreography.
   hero center → left of the features panel → large dim center moment behind the
-  marquee → upper-right bleed beside the portrait → receded beside the projects
-  heading → calm settle under the contact links.
+  marquee → upper-right bleed beside the portrait → calm settle under the
+  contact links.
 */
 export const DESKTOP_POSES: ScenePose[] = [
   {
@@ -105,19 +99,6 @@ export const DESKTOP_POSES: ScenePose[] = [
     lightIntensity: 0.8,
     spin: 0.5,
     end: "center 55%",
-  },
-  {
-    id: "projects",
-    triggerId: "projects",
-    anchorId: "stage-projects",
-    align: "inside-right",
-    z: -0.5,
-    rotation: [0.1, 6.9, 0.1],
-    scale: 0.48,
-    opacity: 0.3,
-    lightIntensity: 0.5,
-    spin: 0.35,
-    end: "top 45%",
   },
   {
     id: "cta",
@@ -192,19 +173,6 @@ export const TABLET_POSES: ScenePose[] = [
     end: "center 55%",
   },
   {
-    id: "projects",
-    triggerId: "projects",
-    anchorId: "stage-projects",
-    align: "anchor-center",
-    z: -0.6,
-    rotation: [0.1, 6.9, 0.1],
-    scale: 0.45,
-    opacity: 0.18,
-    lightIntensity: 0.5,
-    spin: 0.35,
-    end: "top 45%",
-  },
-  {
     id: "cta",
     triggerId: "contact",
     anchorId: "stage-cta",
@@ -276,19 +244,6 @@ export const MOBILE_POSES: ScenePose[] = [
     lightIntensity: 0.5,
     spin: 0.5,
     end: "center 55%",
-  },
-  {
-    id: "projects",
-    triggerId: "projects",
-    anchorId: "stage-projects",
-    align: "anchor-center",
-    z: -0.6,
-    rotation: [0.1, 6.9, 0.1],
-    scale: 0.4,
-    opacity: 0.12,
-    lightIntensity: 0.45,
-    spin: 0.35,
-    end: "top 45%",
   },
   {
     id: "cta",

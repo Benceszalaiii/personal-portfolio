@@ -10,7 +10,8 @@ import { Resend } from "resend";
     can reply straight from your inbox.
 */
 
-const resend = new Resend(process.env.RESEND_KEY);
+// instantiated lazily so a missing RESEND_KEY doesn't crash the build
+let resend: Resend | undefined;
 const TO = process.env.CONTACT_TO_EMAIL ?? "szbence2007@gmail.com";
 const FROM = process.env.CONTACT_FROM ?? "Portfólió kapcsolat <onboarding@resend.dev>";
 
@@ -55,6 +56,7 @@ export async function POST(req: Request) {
   }
 
   try {
+    resend ??= new Resend(process.env.RESEND_KEY);
     const { error } = await resend.emails.send({
       from: FROM,
       to: [TO, "bence.szalai@icloud.com"],

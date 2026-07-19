@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import PlasmaWave from "@/components/PlasmaWave";
+import { Signature } from "@/components/ui/signature";
 import { useThemeColors } from "@/lib/theme-color";
 
 // Staggered entrance that stays visible without JS: SSR renders shown; the
@@ -96,11 +97,17 @@ export default function Hero() {
         >
           Full-stack webfejlesztő
         </p>
-        <h1
-          style={step(1)}
-          className="mt-5 font-display text-6xl font-medium leading-[0.95] tracking-[-0.02em] text-foreground sm:text-7xl md:text-8xl"
-        >
-          Bence Szalai
+        {/* Visually the hand-drawn signature; the sr-only text keeps the
+            page's h1 readable for crawlers and screen readers */}
+        <h1 style={step(1)} className="mt-5">
+          <span className="sr-only">Szalai Bence</span>
+          <Signature
+            text="Szalai Bence"
+            color="var(--primary)"
+            fontSize={72}
+            delay={0.3}
+            className="h-auto max-w-full"
+          />
         </h1>
         <p
           style={step(2)}
@@ -120,10 +127,10 @@ export default function Hero() {
             Beszéljünk a projektedről
           </Link>
           <Link
-            href="#projects"
+            href="#about"
             className="focus-ember inline-flex items-center justify-center rounded-full border border-border px-7 py-3.5 text-sm font-medium text-foreground transition-colors duration-300 hover:border-ember hover:text-ember"
           >
-            Projektek megtekintése
+            Ismerj meg közelebbről
           </Link>
         </div>
       </div>

@@ -42,12 +42,6 @@ export default function Navbar() {
           hoverStyles: hover("calc(l + 0.06)", "calc(c + 0.01)", "calc(h + 5)"),
         },
         {
-          label: "Projektek",
-          href: "#projects",
-          rotation: -6,
-          hoverStyles: hover("calc(l - 0.02)", "calc(c - 0.01)", "calc(h - 1)"),
-        },
-        {
           label: "Kapcsolat",
           href: "#contact",
           rotation: 6,

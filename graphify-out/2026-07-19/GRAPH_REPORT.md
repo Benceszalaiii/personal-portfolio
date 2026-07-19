@@ -1,7 +1,7 @@
 # Graph Report - personal-portfolio  (2026-07-19)
 
 ## Corpus Check
-- 34 files · ~16,151 words
+- 34 files · ~16,150 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
@@ -64,8 +64,8 @@
 ## Communities (18 total, 4 thin omitted)
 
 ### Community 0 - "page.tsx"
-Cohesion: 0.10
-Nodes (33): features, panel, StackSection(), Home(), CurvedLoopProps, MorphingDialog(), MorphingDialogClose(), MorphingDialogCloseProps (+25 more)
+Cohesion: 0.09
+Nodes (35): features, panel, StackSection(), Home(), CurvedLoopProps, MorphingDialog(), MorphingDialogClose(), MorphingDialogCloseProps (+27 more)
 
 ### Community 1 - "components.json"
 Cohesion: 0.07
@@ -112,8 +112,8 @@ Cohesion: 0.22
 Nodes (9): next, react, linter, domains, enabled, rules, recommended, suspicious (+1 more)
 
 ### Community 14 - "next.config.ts"
-Cohesion: 0.13
-Nodes (17): Hero(), useEntrance(), hexToRgb(), PlasmaWave(), PlasmaWaveProps, ScenePalette, TravelGroup(), TravelingScene() (+9 more)
+Cohesion: 0.15
+Nodes (15): Hero(), useEntrance(), hexToRgb(), PlasmaWave(), PlasmaWaveProps, ScenePalette, TravelGroup(), TravelingScene() (+7 more)
 
 ### Community 16 - "next.config.ts"
 Cohesion: 0.29
@@ -132,7 +132,7 @@ _Questions this graph is uniquely positioned to answer:_
 - **What connects `$schema`, `enabled`, `clientKind` to the rest of the system?**
   _154 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `page.tsx` be split into smaller, more focused modules?**
-  _Cohesion score 0.09615384615384616 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.09080841638981174 - nodes in this community are weakly interconnected._
 - **Should `components.json` be split into smaller, more focused modules?**
   _Cohesion score 0.07407407407407407 - nodes in this community are weakly interconnected._
 - **Should `dependencies` be split into smaller, more focused modules?**

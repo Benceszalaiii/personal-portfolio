@@ -40,8 +40,8 @@
     "semantic_hash": ""
   },
   "src/app/page.tsx": {
-    "mtime": 1784478925.766503,
-    "ast_hash": "a27908faf9096d3b208689f56e98de16",
+    "mtime": 1784478185.7051582,
+    "ast_hash": "b07cb6e8a574a5728f33a20e5186f9a7",
     "semantic_hash": ""
   },
   "src/components/BubbleMenu.tsx": {
@@ -110,8 +110,8 @@
     "semantic_hash": ""
   },
   "src/app/Components/Hero.tsx": {
-    "mtime": 1784478920.8755693,
-    "ast_hash": "ea39a43a3b35fdb20b80fe0e1334104a",
+    "mtime": 1784475038.8494575,
+    "ast_hash": "8cdcc4c18ea90997637827351097189c",
     "semantic_hash": ""
   },
   "src/app/api/contact/route.ts": {
@@ -165,8 +165,8 @@
     "semantic_hash": ""
   },
   "src/components/ui/signature.tsx": {
-    "mtime": 1784478839.8510723,
-    "ast_hash": "28d2ca37422a8c8f9ccf275bb3a4362e",
+    "mtime": 1784478203.0188806,
+    "ast_hash": "7b55303ddf3ebb8a9b989c3d2a47f547",
     "semantic_hash": ""
   }
 }
