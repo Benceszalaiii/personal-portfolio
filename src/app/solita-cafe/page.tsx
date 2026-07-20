@@ -100,13 +100,16 @@ export default async function SolitaCafePage({
   return (
     <main className="w-full">
       {/* Intro */}
-      <section className="relative w-full px-4 pb-16 pt-32 md:px-16 md:pb-24 md:pt-40">
+      <section
+        id="intro"
+        className="relative w-full px-4 pb-16 pt-32 md:px-16 md:pb-24 md:pt-40"
+      >
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0 -z-10"
           style={{
             background:
-              "radial-gradient(90% 60% at 50% -10%, oklch(0.4 0.13 28 / 0.35), transparent 70%)",
+              "radial-gradient(90% 60% at 50% -10%, color-mix(in oklab, var(--hero-glow) 35%, transparent), transparent 70%)",
           }}
         />
         <div className="mx-auto max-w-5xl">
@@ -157,7 +160,10 @@ export default async function SolitaCafePage({
       </section>
 
       {/* Az ajánlat */}
-      <section className="relative w-full px-4 py-16 md:px-16 md:py-24">
+      <section
+        id="ajanlat"
+        className="relative w-full px-4 py-16 md:px-16 md:py-24"
+      >
         <div className="mx-auto grid max-w-5xl gap-12 md:grid-cols-[1fr_1.4fr] md:gap-16">
           <Reveal>
             <p className="font-mono text-xs uppercase tracking-[0.2em] text-ember">
@@ -189,7 +195,10 @@ export default async function SolitaCafePage({
       </section>
 
       {/* Funkciók */}
-      <section className="relative w-full px-4 py-16 md:px-16 md:py-24">
+      <section
+        id="funkciok"
+        className="relative w-full px-4 py-16 md:px-16 md:py-24"
+      >
         <div className="mx-auto max-w-6xl">
           <Reveal>
             <p className="font-mono text-xs uppercase tracking-[0.2em] text-ember">
@@ -221,7 +230,10 @@ export default async function SolitaCafePage({
       </section>
 
       {/* Arculat + Stack */}
-      <section className="relative w-full px-4 py-16 md:px-16 md:py-24">
+      <section
+        id="arculat"
+        className="relative w-full px-4 py-16 md:px-16 md:py-24"
+      >
         <div className="mx-auto grid max-w-5xl gap-12 md:grid-cols-2 md:gap-16">
           <Reveal>
             <p className="font-mono text-xs uppercase tracking-[0.2em] text-ember">
@@ -305,7 +317,10 @@ export default async function SolitaCafePage({
       </section>
 
       {/* Záró CTA */}
-      <section className="relative w-full px-4 pb-28 pt-8 md:px-16">
+      <section
+        id="elonezet"
+        className="relative w-full px-4 pb-28 pt-8 md:px-16"
+      >
         <Reveal className="mx-auto max-w-5xl">
           <div className="relative overflow-hidden rounded-3xl border border-border bg-card px-8 py-14 text-center md:px-16 md:py-20">
             <div
@@ -313,7 +328,7 @@ export default async function SolitaCafePage({
               className="pointer-events-none absolute inset-0"
               style={{
                 background:
-                  "radial-gradient(80% 120% at 50% 0%, oklch(0.5 0.16 28 / 0.25), transparent 65%)",
+                  "radial-gradient(80% 120% at 50% 0%, color-mix(in oklab, var(--primary) 25%, transparent), transparent 65%)",
               }}
             />
             <div className="relative">

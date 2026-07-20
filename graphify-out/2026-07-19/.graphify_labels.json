@@ -10,11 +10,12 @@
   "8": "tailwind",
   "9": "layout.tsx",
   "10": "devDependencies",
-  "11": "linter",
+  "11": "BubbleMenu.tsx",
   "12": "PlasmaWave.tsx",
   "13": "CurvedLoop.tsx",
   "14": "next.config.ts",
   "15": "postcss.config.mjs",
   "16": "next.config.ts",
-  "17": "postcss.config.mjs"
+  "17": "postcss.config.mjs",
+  "18": "CurvedLoop.tsx"
 }

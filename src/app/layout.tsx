@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Bodoni_Moda } from "next/font/google";
+import { Bodoni_Moda, Geist, Geist_Mono } from "next/font/google";
 import Link from "next/link";
 import "./globals.css";
-import Navbar from "@/components/navbar";
+import SiteNav from "@/components/SiteNav";
+import FooterLaser from "./Components/FooterLaser";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -42,11 +43,16 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} ${bodoni.variable} dark h-full antialiased`}
     >
       <head>
-        <script async crossOrigin="anonymous" src="https://tweakcn.com/live-preview.min.js" />
+        <script
+          async
+          crossOrigin="anonymous"
+          src="https://tweakcn.com/live-preview.min.js"
+        />
       </head>
       <body className="min-h-full w-full font-sans selection:bg-primary/35 selection:text-foreground">
-        <Navbar />
+        <SiteNav />
         {children}
+        <FooterLaser />
         <footer className="relative border-gradient-t w-full bg-background">
           <div className="mx-auto flex w-full max-w-6xl flex-col items-center justify-between gap-4 px-6 py-8 sm:flex-row">
             <p className="font-display text-lg tracking-tight text-foreground">
@@ -61,10 +67,7 @@ export default function RootLayout({
               >
                 GitHub
               </Link>
-              <a
-                href="#contact"
-                className="transition-colors hover:text-ember"
-              >
+              <a href="#contact" className="transition-colors hover:text-ember">
                 Kapcsolat
               </a>
             </nav>

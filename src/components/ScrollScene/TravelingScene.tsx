@@ -98,7 +98,7 @@ function Monolith({ reduced, body }: { reduced: boolean; body: string }) {
           roughness={0.22}
           flatShading
           transparent
-          envMapIntensity={1.4}
+          envMapIntensity={2.2}
         />
       </mesh>
     </Float>
@@ -141,8 +141,11 @@ function TravelGroup({
     r.scale.setScalar(r.scale.x + (s.scale - r.scale.x) * d);
 
     // pose rotation + damped pointer parallax + slow idle drift
+    // rotation damps slower than position (~0.2s vs ~0.15s) so the pointer
+    // tilt reads as mass, not twitch
+    const dr = reduced ? 1 : 1 - 0.008 ** delta;
     const t = state.clock.elapsedTime;
-    const parallax = reduced || lowPower ? 0 : 0.3;
+    const parallax = reduced || lowPower ? 0 : 0.45;
     const targetY =
       s.ry +
       (reduced
@@ -154,13 +157,13 @@ function TravelGroup({
         ? 0
         : pointer.current.y * parallax * 0.6 +
           Math.cos(t * 0.12) * 0.07 * s.spin);
-    r.rotation.y += (targetY - r.rotation.y) * d;
-    r.rotation.x += (targetX - r.rotation.x) * d;
-    r.rotation.z += (s.rz - r.rotation.z) * d;
+    r.rotation.y += (targetY - r.rotation.y) * dr;
+    r.rotation.x += (targetX - r.rotation.x) * dr;
+    r.rotation.z += (s.rz - r.rotation.z) * dr;
 
-    if (rim.current) rim.current.intensity = 45 * s.light;
-    if (key.current) key.current.intensity = 30 * s.light;
-    if (fill.current) fill.current.intensity = 20 * s.light;
+    if (rim.current) rim.current.intensity = 60 * s.light;
+    if (key.current) key.current.intensity = 42 * s.light;
+    if (fill.current) fill.current.intensity = 30 * s.light;
     // sparkles have a fixed-opacity shader — hide them when the object dims
     if (sparkles.current) sparkles.current.visible = s.opacity > 0.45;
   });
@@ -172,11 +175,11 @@ function TravelGroup({
         {!reduced && !lowPower && (
           <group ref={sparkles}>
             <Sparkles
-              count={18}
-              scale={[4, 3, 2.5]}
+              count={70}
+              scale={[5.5, 4.5, 3.5]}
               size={2.2}
               speed={0.3}
-              opacity={0.45}
+              opacity={0.5}
               color={palette.key}
             />
           </group>
@@ -260,7 +263,7 @@ export default function TravelingScene({
         />
       )}
 
-      <ambientLight intensity={0.25} />
+      <ambientLight intensity={0.4} />
       <TravelGroup reduced={reduced} lowPower={lowPower} palette={palette} />
 
       {/* Reflections for the metal — lightformers only, no network HDRI.
@@ -269,26 +272,43 @@ export default function TravelingScene({
           theme changes so the bake picks up the new palette. */}
       <Environment key={paletteKey} resolution={128} frames={1}>
         <color attach="background" args={[palette.env]} />
+        {/* wrap-around fill: formers on every side so no rotation leaves a
+            face unlit — the metal reads across the whole turn, not just when
+            it happens to point at the key light */}
         <Lightformer
           form="rect"
-          intensity={2.4}
+          intensity={3.4}
           color={palette.rim}
           position={[-3, 2, 3]}
           scale={[4, 6, 1]}
         />
         <Lightformer
           form="rect"
-          intensity={1.6}
+          intensity={2.6}
           color={palette.key}
           position={[3, -1, 2]}
           scale={[3, 4, 1]}
         />
         <Lightformer
           form="circle"
-          intensity={1.2}
+          intensity={2.0}
           color={palette.fill}
           position={[0, 3, -2]}
           scale={[3, 3, 1]}
+        />
+        <Lightformer
+          form="rect"
+          intensity={1.8}
+          color={palette.fill}
+          position={[0, -3, 3]}
+          scale={[5, 3, 1]}
+        />
+        <Lightformer
+          form="rect"
+          intensity={1.6}
+          color={palette.key}
+          position={[-3, -1, -3]}
+          scale={[4, 4, 1]}
         />
       </Environment>
     </Canvas>

@@ -12,8 +12,13 @@ import { Resend } from "resend";
 
 // instantiated lazily so a missing RESEND_KEY doesn't crash the build
 let resend: Resend | undefined;
-const TO = process.env.CONTACT_TO_EMAIL ?? "szbence2007@gmail.com";
-const FROM = process.env.CONTACT_FROM ?? "Portfólió kapcsolat <onboarding@resend.dev>";
+// CONTACT_TO_EMAIL may hold one address or a comma-separated list
+const TO = (process.env.CONTACT_TO_EMAIL ?? "szbence2007@gmail.com")
+  .split(",")
+  .map((address) => address.trim())
+  .filter(Boolean);
+const FROM =
+  process.env.CONTACT_FROM ?? "Portfólió kapcsolat <onboarding@resend.dev>";
 
 const isEmail = (v: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
 
@@ -59,7 +64,7 @@ export async function POST(req: Request) {
     resend ??= new Resend(process.env.RESEND_KEY);
     const { error } = await resend.emails.send({
       from: FROM,
-      to: [TO, "bence.szalai@icloud.com"],
+      to: TO,
       replyTo: email,
       subject: `Új üzenet a portfólióról — ${name}`,
       text: `Név: ${name}\nE-mail: ${email}\n\n${message}`,
