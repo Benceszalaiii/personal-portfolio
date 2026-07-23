@@ -1,8 +1,9 @@
+"use server"
 import Link from "next/link";
 import Reveal from "@/components/motion/Reveal";
 import OfferWizard from "@/components/OfferWizard";
 
-export default function ContactSection() {
+export default async function ContactSection() {
   return (
     <section
       id="contact"
@@ -26,10 +27,10 @@ export default function ContactSection() {
               Vagy írj közvetlenül
             </p>
             <a
-              href="mailto:szbence2007@gmail.com"
+              href={`mailto:${process.env.CONTACT_TO_EMAIL ?? "bence.szalai@icloud.com"}`}
               className="font-mono text-sm text-foreground transition-colors hover:text-ember"
             >
-              szbence2007@gmail.com
+              {process.env.CONTACT_TO_EMAIL ?? "bence.szalai@icloud.com"}
             </a>
             <Link
               href="https://github.com/benceszalaiii"

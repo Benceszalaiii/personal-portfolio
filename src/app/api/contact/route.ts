@@ -13,7 +13,7 @@ import { Resend } from "resend";
 // instantiated lazily so a missing RESEND_KEY doesn't crash the build
 let resend: Resend | undefined;
 // CONTACT_TO_EMAIL may hold one address or a comma-separated list
-const TO = (process.env.CONTACT_TO_EMAIL ?? "szbence2007@gmail.com")
+const TO = (process.env.CONTACT_TO_EMAIL ?? "bence.szalai@icloud.com")
   .split(",")
   .map((address) => address.trim())
   .filter(Boolean);
