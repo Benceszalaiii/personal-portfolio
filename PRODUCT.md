@@ -6,21 +6,21 @@ brand
 
 ## Users
 
-Hungarian businesses — small-to-medium companies and individuals who need a website built and are deciding whether to hire Bence Szalai to build it. They arrive from a referral, a link, or a search, usually non-technical, evaluating in Hungarian. Their unspoken question is "can this person deliver something that makes *my* business look credible?" The site's own craft is the answer, so the portfolio must double as a live proof-of-work: if it looks premium and runs smoothly, the pitch lands before they read a word.
+Hungarian businesses — small-to-medium companies and individuals who need a website built and are deciding whether to hire Szalai Bence to build it. They arrive from a referral, a link, or a search, usually non-technical, evaluating in Hungarian. Their unspoken question is "can this person deliver something that makes _my_ business look credible?" The site's own craft is the answer, so the portfolio must double as a live proof-of-work: if it looks premium and runs smoothly, the pitch lands before they read a word.
 
 ## Product Purpose
 
-A personal portfolio for Bence Szalai, a full-stack web developer, whose primary job is to **convert visiting Hungarian businesses into freelance clients**. It exists to (1) demonstrate technical and visual craft through the site itself, (2) show real past work (e.g. Inua Saunamanufaktur), and (3) give an interested prospect an obvious, low-friction way to make contact. Success = a qualified prospect leaves convinced enough to reach out about a project. Landing a job/internship is a welcome side effect, not the design target.
+A personal portfolio for Szalai Bence, a full-stack web developer, whose primary job is to **convert visiting Hungarian businesses into freelance clients**. It exists to (1) demonstrate technical and visual craft through the site itself, (2) show real past work (e.g. Inua Saunamanufaktur), and (3) give an interested prospect an obvious, low-friction way to make contact. Success = a qualified prospect leaves convinced enough to reach out about a project. Landing a job/internship is a welcome side effect, not the design target.
 
 ## Brand Personality
 
-Clean, professional, and confident, with a **premium/luxury** register carried by a dark-red-on-charcoal theme. Technical firepower is shown, not shouted: signature effects (the plasma hero, purposeful 3D, tasteful motion) exist to signal capability, but every one of them must feel *controlled* — evidence of taste and restraint, not a demo of every trick at once. Three words: **premium, assured, crafted.** The emotional goal is trust with a spark of "this person is clearly very good." Voice is Hungarian throughout, professional but human — this is a real 19-year-old developer, not a faceless agency.
+Clean, professional, and confident, with a **premium/luxury** register carried by a dark-red-on-charcoal theme. Technical firepower is shown, not shouted: signature effects (the plasma hero, purposeful 3D, tasteful motion) exist to signal capability, but every one of them must feel _controlled_ — evidence of taste and restraint, not a demo of every trick at once. Three words: **premium, assured, crafted.** The emotional goal is trust with a spark of "this person is clearly very good." Voice is Hungarian throughout, professional but human — this is a real 19-year-old developer, not a faceless agency.
 
 ## Anti-references
 
 - **Generic dev-portfolio template** — obvious starter theme, predictable layout, nothing that couldn't be swapped between a hundred developers. The site must not look default.
 - **Effect-soup / cluttered** — animations fighting each other, motion for its own sake, style smothering readability. Every effect earns its place or it's cut.
-- **Childish / amateur** — anything that reads as a first project undermines the "hire me to build *your* business's site" pitch. The bar is work a paying client would be proud to have made for them.
+- **Childish / amateur** — anything that reads as a first project undermines the "hire me to build _your_ business's site" pitch. The bar is work a paying client would be proud to have made for them.
 - Also avoid: cold corporate sterility with no personality behind the polish.
 
 ## Design Principles

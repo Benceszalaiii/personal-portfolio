@@ -27,7 +27,7 @@ const bodoni = Bodoni_Moda({
 });
 
 export const metadata: Metadata = {
-  title: "Bence Szalai — Full-stack webfejlesztő",
+  title: "Szalai Bence — Full-stack webfejlesztő",
   description:
     "Egyedi, prémium weboldalak vállalkozásoknak. Szalai Bence full-stack webfejlesztő portfóliója.",
 };
@@ -56,7 +56,7 @@ export default function RootLayout({
         <footer className="relative border-gradient-t w-full bg-background">
           <div className="mx-auto flex w-full max-w-6xl flex-col items-center justify-between gap-4 px-6 py-8 sm:flex-row">
             <p className="font-display text-lg tracking-tight text-foreground">
-              Bence Szalai
+              Szalai Bence
             </p>
             <nav className="flex items-center gap-6 font-mono text-xs uppercase tracking-[0.15em] text-muted-foreground">
               <Link
@@ -72,7 +72,7 @@ export default function RootLayout({
               </a>
             </nav>
             <p className="font-mono text-xs text-muted-foreground">
-              © {new Date().getFullYear()} Bence Szalai
+              © {new Date().getFullYear()} Szalai Bence
             </p>
           </div>
         </footer>
