@@ -12,7 +12,7 @@ type SectionLink = { label: string; id: string };
 const SECTIONS: Record<string, SectionLink[]> = {
   "/": [
     { label: "Kezdőlap", id: "home" },
-    { label: "Bemutató", id: "showcase" },
+    { label: "Munkáim", id: "munkaim" },
     { label: "Szolgáltatások", id: "features" },
     { label: "Rólam", id: "about" },
     { label: "Kapcsolat", id: "contact" },
@@ -26,16 +26,34 @@ const SECTIONS: Record<string, SectionLink[]> = {
   ],
 };
 
+/**
+ * Sections a page declares about itself: `id` + `data-nav-section="Label"` on
+ * the section element. Used for routes whose sections aren't known up front
+ * (case studies build theirs from content), so they get a sidebar without
+ * being registered in SECTIONS above.
+ */
+function readDeclaredSections(): SectionLink[] {
+  return [...document.querySelectorAll("[data-nav-section][id]")].map((el) => ({
+    label: el.getAttribute("data-nav-section") ?? "",
+    id: el.id,
+  }));
+}
+
 export default function SiteNav() {
   const pathname = usePathname();
-  const sections = SECTIONS[pathname] ?? [];
+  const [sections, setSections] = useState<SectionLink[]>(
+    () => SECTIONS[pathname] ?? [],
+  );
   const [active, setActive] = useState(0);
 
   // Scroll-spy: a section becomes active while it crosses a thin band just
   // above the viewport's middle, so manual scrolling keeps the sidebar in sync.
   useEffect(() => {
     setActive(0);
-    const els = (SECTIONS[pathname] ?? [])
+    const found = SECTIONS[pathname] ?? readDeclaredSections();
+    setSections(found);
+
+    const els = found
       .map((s) => document.getElementById(s.id))
       .filter((el): el is HTMLElement => el !== null);
     if (els.length === 0) return;

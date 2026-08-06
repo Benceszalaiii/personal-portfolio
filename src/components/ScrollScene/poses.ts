@@ -13,7 +13,7 @@
     turns forward — no rewinding between sections.
 */
 
-export type SceneId = "hero" | "showcase" | "features" | "about" | "cta";
+export type SceneId = "hero" | "work" | "features" | "about" | "cta";
 
 export type PoseAlign =
   | "viewport-center" // ignore the anchor, center of the viewport
@@ -43,9 +43,8 @@ export type ScenePose = {
 
 /*
   Desktop (≥1024px): the full editorial choreography.
-  hero center → dim recede behind the showcase pitch → left of the features
-  panel → upper-right bleed beside the portrait → calm settle under the
-  contact links.
+  hero center → dim recede behind the work cards → left of the features panel →
+  upper-right bleed beside the portrait → calm settle under the contact links.
 */
 export const DESKTOP_POSES: ScenePose[] = [
   {
@@ -61,10 +60,10 @@ export const DESKTOP_POSES: ScenePose[] = [
     spin: 1,
   },
   {
-    // dim recede behind the sticky showcase pitch — the MacBook owns this beat
-    id: "showcase",
-    triggerId: "showcase",
-    anchorId: "stage-showcase",
+    // dim recede behind the case-study cards — dense content, needs legibility
+    id: "work",
+    triggerId: "munkaim",
+    anchorId: "stage-munkaim",
     align: "anchor-center",
     z: -0.9,
     rotation: [0.3, 1.4, 0.06],
@@ -135,9 +134,9 @@ export const TABLET_POSES: ScenePose[] = [
     spin: 1,
   },
   {
-    id: "showcase",
-    triggerId: "showcase",
-    anchorId: "stage-showcase",
+    id: "work",
+    triggerId: "munkaim",
+    anchorId: "stage-munkaim",
     align: "anchor-center",
     z: -0.9,
     rotation: [0.3, 1.4, 0.06],
@@ -209,9 +208,9 @@ export const MOBILE_POSES: ScenePose[] = [
     spin: 1,
   },
   {
-    id: "showcase",
-    triggerId: "showcase",
-    anchorId: "stage-showcase",
+    id: "work",
+    triggerId: "munkaim",
+    anchorId: "stage-munkaim",
     align: "anchor-center",
     z: -0.8,
     rotation: [0.3, 1.4, 0.06],

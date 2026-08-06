@@ -4,9 +4,9 @@ import AboutSection from "./Components/AboutSection";
 import ContactSection from "./Components/ContactSection";
 import FaqSection from "./Components/FaqSection";
 import Hero from "./Components/Hero";
-import MacbookShowcase from "./Components/MacbookShowcase";
 import StackSection from "./Components/StackSection";
 import TechLoop from "./Components/TechLoop";
+import WorkSection from "./Components/WorkSection";
 
 export default function Home() {
   return (
@@ -14,7 +14,7 @@ export default function Home() {
     <main className="relative w-full">
       <Hero />
 
-      <MacbookShowcase />
+      <WorkSection />
 
       <StackSection />
 

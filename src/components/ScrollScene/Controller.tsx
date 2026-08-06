@@ -68,7 +68,13 @@ function poseTarget(
   return pxToWorld(xPx, yPx, vw, vh, pose.z);
 }
 
-function buildJourney(poses: ScenePose[]): void {
+function buildJourney(all: ScenePose[]): void {
+  // Drop poses whose section isn't on the page (a section removed from
+  // page.tsx). Done up front so the chain below stays dense — the segment
+  // indexing assumes pose i-1 is the one we actually flew in from.
+  const poses = all.filter(
+    (p, i) => i === 0 || document.getElementById(p.triggerId),
+  );
   // sts[k] = ScrollTrigger of the segment that ARRIVES at poses[k + 1]
   const sts: ScrollTrigger[] = [];
   const targetOf = (i: number) =>
@@ -94,7 +100,7 @@ function buildJourney(poses: ScenePose[]): void {
     const prev = poses[i - 1];
     const next = poses[i];
     const section = document.getElementById(next.triggerId);
-    if (!section) continue;
+    if (!section) continue; // filtered above; narrows the type
     const idx = i;
 
     const tween = gsap.fromTo(
