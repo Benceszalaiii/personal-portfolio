@@ -1,0 +1,232 @@
+{
+  ".vscode/settings.json": {
+    "mtime": 1784400937.3826263,
+    "ast_hash": "eb8a2f2d70779804f74953bf4c2a2894",
+    "semantic_hash": ""
+  },
+  "biome.json": {
+    "mtime": 1784400937.3829865,
+    "ast_hash": "cb8a403436455fcac7cd9d433241aa45",
+    "semantic_hash": "cb8a403436455fcac7cd9d433241aa45"
+  },
+  "components.json": {
+    "mtime": 1784400937.3833332,
+    "ast_hash": "890ccfd92049cafc33880ceb774b007d",
+    "semantic_hash": "890ccfd92049cafc33880ceb774b007d"
+  },
+  "next.config.ts": {
+    "mtime": 1784400937.386866,
+    "ast_hash": "9b77af189a21a7a64e4bd7a426f64176",
+    "semantic_hash": "9b77af189a21a7a64e4bd7a426f64176"
+  },
+  "package.json": {
+    "mtime": 1784504282.2103436,
+    "ast_hash": "680b21d2bc324c5f9ba3702d942f300c",
+    "semantic_hash": ""
+  },
+  "postcss.config.mjs": {
+    "mtime": 1784400937.3870237,
+    "ast_hash": "239f3ebf717465dc636818a1a619398d",
+    "semantic_hash": "239f3ebf717465dc636818a1a619398d"
+  },
+  "src/app/Components/StackSection.tsx": {
+    "mtime": 1784583507.4119794,
+    "ast_hash": "eb0e9a2585cb6f46e388a76051fc3681",
+    "semantic_hash": ""
+  },
+  "src/app/layout.tsx": {
+    "mtime": 1784502290.0116427,
+    "ast_hash": "526b0565d52a46985cb3769dafc17363",
+    "semantic_hash": ""
+  },
+  "src/app/page.tsx": {
+    "mtime": 1784583501.6403072,
+    "ast_hash": "e26a03fa8f4205036bc3c7020b838751",
+    "semantic_hash": ""
+  },
+  "src/components/BubbleMenu.tsx": {
+    "mtime": 1784400937.4165168,
+    "ast_hash": "2a81c17c192dcb609d234f05832cb6da",
+    "semantic_hash": "2a81c17c192dcb609d234f05832cb6da"
+  },
+  "src/components/CurvedLoop.tsx": {
+    "mtime": 1784400937.4165823,
+    "ast_hash": "c2c321f8a10957443a82435c89c87e7d",
+    "semantic_hash": "c2c321f8a10957443a82435c89c87e7d"
+  },
+  "src/components/DecryptedText.tsx": {
+    "mtime": 1784400937.4166455,
+    "ast_hash": "dbc994bf57efc128fc2f64192fc6046b",
+    "semantic_hash": "dbc994bf57efc128fc2f64192fc6046b"
+  },
+  "src/components/GradientText.tsx": {
+    "mtime": 1784400937.4167,
+    "ast_hash": "6de1468813a63b403857bfb8476c278b",
+    "semantic_hash": "6de1468813a63b403857bfb8476c278b"
+  },
+  "src/components/PlasmaWave.tsx": {
+    "mtime": 1784400937.416768,
+    "ast_hash": "794a44dff9728cd9ee3641c50030ca39",
+    "semantic_hash": "794a44dff9728cd9ee3641c50030ca39"
+  },
+  "src/components/ScrollStack.tsx": {
+    "mtime": 1784400937.417132,
+    "ast_hash": "b40ccfc45e83ea3e82d8e2215e008c4d",
+    "semantic_hash": "b40ccfc45e83ea3e82d8e2215e008c4d"
+  },
+  "src/components/ui/morphing-dialog.tsx": {
+    "mtime": 1784400937.4173605,
+    "ast_hash": "624940ad2c01e55773826cbad52d0b1d",
+    "semantic_hash": "624940ad2c01e55773826cbad52d0b1d"
+  },
+  "src/components/ui/tabs.tsx": {
+    "mtime": 1784400937.417415,
+    "ast_hash": "b7dfb820b9ec697e69a9f041a9e99376",
+    "semantic_hash": "b7dfb820b9ec697e69a9f041a9e99376"
+  },
+  "src/lib/utils.ts": {
+    "mtime": 1784400937.4175546,
+    "ast_hash": "5a6fd53fdcf2be529e9cc0b718fde352",
+    "semantic_hash": "5a6fd53fdcf2be529e9cc0b718fde352"
+  },
+  "tsconfig.json": {
+    "mtime": 1784400937.417602,
+    "ast_hash": "ee17fd1c97c735e9f3564e3f5251f125",
+    "semantic_hash": "ee17fd1c97c735e9f3564e3f5251f125"
+  },
+  ".impeccable/live/config.json": {
+    "mtime": 1784400937.3825455,
+    "ast_hash": "7cdace06f1017cda9ba30957c8102ef0",
+    "semantic_hash": "7cdace06f1017cda9ba30957c8102ef0"
+  },
+  "src/app/Components/ContactSection.tsx": {
+    "mtime": 1784475201.3393028,
+    "ast_hash": "f54421401758658d3333ec953f20b085",
+    "semantic_hash": ""
+  },
+  "src/app/Components/Hero.tsx": {
+    "mtime": 1784478920.8755693,
+    "ast_hash": "ea39a43a3b35fdb20b80fe0e1334104a",
+    "semantic_hash": ""
+  },
+  "src/app/api/contact/route.ts": {
+    "mtime": 1784554373.8442392,
+    "ast_hash": "b6c5344390fd06c54d240c2bf5b06d7b",
+    "semantic_hash": ""
+  },
+  "src/app/solita-cafe/page.tsx": {
+    "mtime": 1784481193.1487904,
+    "ast_hash": "d2e6c31b27d2c39308c81b2370371801",
+    "semantic_hash": ""
+  },
+  "src/components/motion/Reveal.tsx": {
+    "mtime": 1784400937.417216,
+    "ast_hash": "629cd2fcadcaacc37ff949bfe37a368a",
+    "semantic_hash": "629cd2fcadcaacc37ff949bfe37a368a"
+  },
+  "src/components/ScrollScene/Controller.tsx": {
+    "mtime": 1784400937.416861,
+    "ast_hash": "8622c94751090f8aee0afdddd15eae23",
+    "semantic_hash": ""
+  },
+  "src/components/ScrollScene/TravelingScene.tsx": {
+    "mtime": 1784584629.610898,
+    "ast_hash": "0a3a16bc44d354e3e333d0f07f12a30d",
+    "semantic_hash": ""
+  },
+  "src/components/ScrollScene/index.tsx": {
+    "mtime": 1784400937.416968,
+    "ast_hash": "50b473e65452d8257c84ecd4af5c9dea",
+    "semantic_hash": ""
+  },
+  "src/components/ScrollScene/poses.ts": {
+    "mtime": 1784502887.1325903,
+    "ast_hash": "67784859b9671774d02a7d9ff46eb1a7",
+    "semantic_hash": ""
+  },
+  "src/components/ScrollScene/scene-state.ts": {
+    "mtime": 1784400937.4170792,
+    "ast_hash": "4fd336db8d36fe8f0cd324fd8861325f",
+    "semantic_hash": ""
+  },
+  "src/lib/theme-color.ts": {
+    "mtime": 1784400937.4175007,
+    "ast_hash": "3d4c8214854dc94aa5a3328ec5772ccf",
+    "semantic_hash": ""
+  },
+  "src/components/OfferWizard.tsx": {
+    "mtime": 1784475225.9751782,
+    "ast_hash": "35bc7ef2419335bb7d2abbad8aff24ac",
+    "semantic_hash": ""
+  },
+  "src/components/ui/signature.tsx": {
+    "mtime": 1784478839.8510723,
+    "ast_hash": "28d2ca37422a8c8f9ccf275bb3a4362e",
+    "semantic_hash": ""
+  },
+  "src/components/ui/macbook-scroll.tsx": {
+    "mtime": 1784584769.4318523,
+    "ast_hash": "362b1dd80785c64c7f31d6b2a12dc3b4",
+    "semantic_hash": ""
+  },
+  "src/components/LineSidebar.tsx": {
+    "mtime": 1784481658.3398926,
+    "ast_hash": "f3c34d88777ddc3e9173e94720d416ab",
+    "semantic_hash": ""
+  },
+  "src/components/SiteNav.tsx": {
+    "mtime": 1784553836.910291,
+    "ast_hash": "965e5767a459f05648664ea71741a1ba",
+    "semantic_hash": ""
+  },
+  "src/app/Components/MacbookShowcase.tsx": {
+    "mtime": 1784584707.6923609,
+    "ast_hash": "c548ce52b5ef9122539e241c3590a272",
+    "semantic_hash": ""
+  },
+  "src/app/Components/AboutSection.tsx": {
+    "mtime": 1784553838.189149,
+    "ast_hash": "0731b4cea145582304646ed001b33dc5",
+    "semantic_hash": ""
+  },
+  "src/app/Components/FooterLaser.tsx": {
+    "mtime": 1784502398.4519045,
+    "ast_hash": "98567bd2a892b4ca9408509b2328486e",
+    "semantic_hash": ""
+  },
+  "src/components/LaserFlow.tsx": {
+    "mtime": 1784502312.415404,
+    "ast_hash": "f83dfe7b25713b276f08648527e889ef",
+    "semantic_hash": ""
+  },
+  "src/app/Components/TechLoop.tsx": {
+    "mtime": 1784549578.084905,
+    "ast_hash": "e3e029168919a6df0d7cf50041171c84",
+    "semantic_hash": ""
+  },
+  "src/components/LogoLoop.tsx": {
+    "mtime": 1784503762.1517482,
+    "ast_hash": "0ce389200858730abfa495f15fc295bc",
+    "semantic_hash": ""
+  },
+  "public/picture.jpeg": {
+    "mtime": 1784553553.4923203,
+    "ast_hash": "ba35e03eabd90123e992b8f7a9d33c8f",
+    "semantic_hash": ""
+  },
+  "src/components/ui/button.tsx": {
+    "mtime": 1784554488.1500385,
+    "ast_hash": "b33e79168005e05d37334907ed7b0c65",
+    "semantic_hash": ""
+  },
+  "src/components/uitripled/services-grid-block-shadcnui.tsx": {
+    "mtime": 1784554758.1112936,
+    "ast_hash": "eadfde7335f8a238dc175a7350b0783c",
+    "semantic_hash": ""
+  },
+  "src/app/Components/FaqSection.tsx": {
+    "mtime": 1784583534.5704136,
+    "ast_hash": "5e4317422be2b7b525b7662fc83a7ccb",
+    "semantic_hash": ""
+  }
+}

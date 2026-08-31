@@ -2,6 +2,7 @@
 
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Plus } from "lucide-react";
+import Link from "next/link";
 import { useState } from "react";
 
 /*
@@ -12,10 +13,24 @@ import { useState } from "react";
   objections a Hungarian SMB has before it reaches out.
 */
 
-const faqs = [
+/*
+  `link` is optional and exists for exactly one row today.
+
+  "Mennyibe kerül egy weboldal?" is the highest-intent question on the page, and
+  it used to answer with "kérj ajánlatot" — routing the one visitor who wants a
+  number into a form, past a calculator that would have given them the number
+  immediately. The answer now names the calculator and the row carries a real
+  link to it.
+*/
+const faqs: {
+  q: string;
+  a: string;
+  link?: { href: string; label: string };
+}[] = [
   {
     q: "Mennyibe kerül egy weboldal?",
-    a: "Az ár a projekt terjedelmétől függ — egy bemutatkozó oldal más kategória, mint egy webshop. Miután megismertem az igényeidet, fix, tételes árajánlatot adok, meglepetések nélkül. Az ajánlatkérés ingyenes és nem kötelez semmire.",
+    a: "Az ár a projekt terjedelmétől függ — egy bemutatkozó oldal más kategória, mint egy webshop. Az árlistát viszont nem kell kitalálnod: minden tétel fix áron szerepel a kalkulátorban, így pár kattintásból megkapod a nagyságrendet. A tételes ajánlatot ezután állítom össze — ingyenes, és nem kötelez semmire.",
+    link: { href: "/kalkulator", label: "Számold ki az árad" },
   },
   {
     q: "Mennyi idő alatt készül el?",
@@ -50,16 +65,19 @@ export default function FaqSection() {
   return (
     <section
       id="faq"
-      // lg:pl-44 clears the fixed section sidebar, matching the other sections
-      className="relative z-20 w-full px-4 py-24 md:px-16 md:py-32 lg:pl-44"
+      // The lg sidebar gutter comes from <main> in page.tsx.
+      className="relative z-20 w-full px-4 py-24 md:px-16 md:py-32"
     >
       <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
         {/* Left: intro (sticky on desktop) */}
         <div className="lg:sticky lg:top-28 lg:self-start">
-          <p className="font-mono text-xs uppercase tracking-[0.2em] text-ember">
-            GYIK
-          </p>
-          <h2 className="mt-4 font-display text-3xl font-medium leading-[1.1] text-foreground md:text-5xl">
+          {/*
+            "kérdések" costs ~6.7x the font-size, and text-5xl put it flush
+            against its own column at 1024px — with the rail gutter reserved it
+            would have tipped over. The 2.5rem ceiling holds it inside the
+            292px column there, and it only reaches full size at ~1290px.
+          */}
+          <h2 className="mt-4 font-display text-[clamp(1.75rem,3.1vw,2.5rem)] font-medium leading-[1.1] text-foreground [hyphens:auto]">
             Gyakori kérdések
           </h2>
           <p className="mt-5 max-w-sm text-lg leading-relaxed text-muted-foreground">
@@ -127,9 +145,27 @@ export default function FaqSection() {
                       transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
                       className="overflow-hidden"
                     >
-                      <p className="max-w-[62ch] pb-6 text-base leading-relaxed text-muted-foreground">
-                        {item.a}
-                      </p>
+                      {/* pb-6 moved to the wrapper so the link sits inside the
+                          answer's padding rather than under it. */}
+                      <div className="pb-6">
+                        <p className="max-w-[62ch] text-base leading-relaxed text-muted-foreground">
+                          {item.a}
+                        </p>
+                        {item.link ? (
+                          <Link
+                            href={item.link.href}
+                            className="focus-ember group/link mt-5 inline-flex items-center gap-2 rounded-sm text-sm font-semibold text-ember underline decoration-ember/40 underline-offset-4 transition-colors hover:text-foreground"
+                          >
+                            {item.link.label}
+                            <span
+                              aria-hidden
+                              className="transition-transform duration-200 ease-[var(--ease-out-quint)] group-hover/link:translate-x-1"
+                            >
+                              →
+                            </span>
+                          </Link>
+                        ) : null}
+                      </div>
                     </motion.div>
                   )}
                 </AnimatePresence>

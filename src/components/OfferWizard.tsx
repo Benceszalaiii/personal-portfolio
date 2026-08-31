@@ -25,6 +25,28 @@ interface OfferData {
   company: string;
 }
 
+/**
+ * A configuration handed over from /kalkulator.
+ *
+ * The calculator has already answered steps 1–3 factually — which package,
+ * which add-ons, what it comes to — so a visitor arriving with one of these
+ * must not be asked the same questions again in vaguer form. They land on the
+ * contact step with the itemised configuration shown above the fields, and
+ * `lines` travels verbatim into the e-mail, so the enquiry arrives as a spec
+ * rather than as a mood.
+ */
+export interface OfferPrefill {
+  projectType: string;
+  features: string[];
+  budget: string;
+  /** Itemised configuration: label / value pairs, already formatted. */
+  lines: { label: string; value: string }[];
+  /** Headline figures, e.g. "360 000 Ft egyszeri · 10 000 Ft/hó". */
+  total: string;
+  /** True when the estimate is explicitly a starting point, not a quote. */
+  indicative: boolean;
+}
+
 const INITIAL: OfferData = {
   projectType: "",
   features: [],
@@ -56,7 +78,7 @@ const PROJECT_TYPES = [
   {
     value: "webapp",
     label: "Webalkalmazás",
-    desc: "Egyedi funkciók: foglalás, ügyfélportál, belső rendszer",
+    desc: "Foglalás, ügyfélportál, készlet, belső rendszer",
   },
   {
     value: "redesign",
@@ -66,7 +88,7 @@ const PROJECT_TYPES = [
   {
     value: "landing",
     label: "Landing oldal",
-    desc: "Egyetlen ütős oldal kampányhoz vagy termékhez",
+    desc: "Egyetlen fókuszált oldal egy kampányhoz vagy termékhez",
   },
   {
     value: "unsure",
@@ -113,8 +135,8 @@ const FEATURE_OPTIONS = [
   },
   {
     value: "motion",
-    label: "Egyedi animációk / 3D",
-    desc: "Prémium vizuális élmény — mint ezen az oldalon",
+    label: "Animáció / 3D",
+    desc: "Amilyen mozgás ezen az oldalon van",
   },
 ] as const;
 
@@ -137,20 +159,22 @@ const STEPS: Record<Step, { title: string; subtitle: string }> = {
   1: {
     title: "Milyen projektet képzelsz el?",
     subtitle:
-      "Válaszd ki, ami a legközelebb áll hozzá — a részleteket később pontosítjuk.",
+      "Válaszd ki, milyen projektet képzelsz el — a részleteket később pontosítjuk.",
   },
   2: {
     title: "Mire lesz szükséged?",
     subtitle:
-      "Jelöld be, ami eszedbe jut — ha még nem tudod, nyugodtan lépj tovább.",
+      "Jelöld be, milyen funkciókra lesz szükséged — ha még nem tudod, nyugodtan lépj tovább.",
   },
   3: {
     title: "Keretek",
-    subtitle: "Egy reális ajánlathoz sokat segít, ha látom a kereteket.",
+    subtitle:
+      "Egy reális ajánlathoz sokat segít, ha látom a határidőt és a költségkeretet.",
   },
   4: {
     title: "Elérhetőségeid",
-    subtitle: "Egy munkanapon belül személyre szabott ajánlattal jelentkezem.",
+    subtitle:
+      "Hova küldjem az ajánlatot? Egy munkanapon belül jelentkezem vele.",
   },
 };
 
@@ -402,32 +426,54 @@ function Step4({
   data,
   onChange,
   errors,
+  prefill,
 }: {
   data: OfferData;
   onChange: (field: keyof OfferData, value: string) => void;
   errors: Partial<Record<keyof OfferData, string>>;
+  prefill?: OfferPrefill;
 }) {
-  const summary: { label: string; value: string }[] = [
-    { label: "Projekt", value: optionLabel(PROJECT_TYPES, data.projectType) },
-    ...(data.features.length > 0
-      ? [
-          {
-            label: "Funkciók",
-            value: data.features
-              .map((f) => optionLabel(FEATURE_OPTIONS, f))
-              .join(", "),
-          },
-        ]
-      : []),
-    { label: "Költségvetés", value: optionLabel(BUDGET_OPTIONS, data.budget) },
-    { label: "Indulás", value: optionLabel(TIMELINE_OPTIONS, data.timeline) },
-  ];
+  /*
+    A calculator hand-off REPLACES the derived summary rather than joining it.
+    Showing both would restate the same configuration twice — once itemised and
+    once as a budget band — and the vaguer of the two would undermine the number
+    the visitor just watched assemble itself.
+  */
+  const summary: { label: string; value: string }[] = prefill
+    ? prefill.lines
+    : [
+        {
+          label: "Projekt",
+          value: optionLabel(PROJECT_TYPES, data.projectType),
+        },
+        ...(data.features.length > 0
+          ? [
+              {
+                label: "Funkciók",
+                value: data.features
+                  .map((f) => optionLabel(FEATURE_OPTIONS, f))
+                  .join(", "),
+              },
+            ]
+          : []),
+        {
+          label: "Költségvetés",
+          value: optionLabel(BUDGET_OPTIONS, data.budget),
+        },
+        {
+          label: "Indulás",
+          value: optionLabel(TIMELINE_OPTIONS, data.timeline),
+        },
+      ];
 
   return (
     <div className="flex flex-col gap-4">
       <dl className="grid gap-x-6 gap-y-1.5 rounded-xl border border-border bg-background/60 px-4 py-3 text-sm sm:grid-cols-[auto_1fr]">
-        {summary.map((row) => (
-          <div key={row.label} className="contents">
+        {/* Indexed key: a calculator hand-off can legitimately repeat a label
+            (two advisories both read "Még egyeztetendő"), so the label alone is
+            not unique. */}
+        {summary.map((row, i) => (
+          <div key={`${row.label}-${i}`} className="contents">
             <dt className="font-mono text-xs uppercase tracking-[0.15em] text-muted-foreground sm:py-0.5">
               {row.label}
             </dt>
@@ -436,6 +482,16 @@ function Step4({
             </dd>
           </div>
         ))}
+        {prefill && (
+          <div className="contents">
+            <dt className="border-t border-border pt-2 font-mono text-xs uppercase tracking-[0.15em] text-muted-foreground sm:py-0.5 sm:pt-2.5">
+              {prefill.indicative ? "Irányár" : "Becsült ár"}
+            </dt>
+            <dd className="border-t border-border pt-2 font-semibold tabular-nums text-ember sm:py-0.5 sm:pt-2.5">
+              {prefill.total}
+            </dd>
+          </div>
+        )}
       </dl>
 
       <div className="grid gap-4 sm:grid-cols-2">
@@ -517,6 +573,31 @@ function Step4({
           />
         </div>
       </div>
+
+      {/*
+        A prefilled wizard never shows step 3, so the one genuinely open
+        question on it — "tell me about the project" — is re-homed here rather
+        than lost. It is the only field the calculator cannot answer.
+      */}
+      {prefill && (
+        <div className="flex flex-col gap-2">
+          <label htmlFor="offer-desc-inline" className={fieldLabel}>
+            Bármi, amit még tudnom kellene{" "}
+            <span className="normal-case text-muted-foreground/50">
+              (opcionális)
+            </span>
+          </label>
+          <textarea
+            id="offer-desc-inline"
+            rows={3}
+            maxLength={5000}
+            value={data.description}
+            onChange={(e) => onChange("description", e.target.value)}
+            placeholder="Például: határidő, meglévő arculat, vagy mire kell leginkább figyelni…"
+            className={`${field} resize-y`}
+          />
+        </div>
+      )}
     </div>
   );
 }
@@ -527,10 +608,22 @@ function Step4({
 
 const isEmail = (v: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
 
-function composeMessage(data: OfferData): string {
+function composeMessage(data: OfferData, prefill?: OfferPrefill): string {
+  // A calculator hand-off leads with the itemised configuration: it is the part
+  // of the enquiry that can be acted on without a reply.
+  const configuration = prefill
+    ? [
+        "── Kalkulátor összeállítás ──",
+        ...prefill.lines.map((line) => `${line.label}: ${line.value}`),
+        `${prefill.indicative ? "Irányár" : "Becsült ár"}: ${prefill.total}`,
+        "",
+      ]
+    : [];
+
   return [
     "Ajánlatkérés a portfólió űrlapról",
     "",
+    ...configuration,
     `Projekt típusa: ${optionLabel(PROJECT_TYPES, data.projectType)}`,
     data.features.length > 0
       ? `Kért funkciók: ${data.features
@@ -548,10 +641,30 @@ function composeMessage(data: OfferData): string {
     .join("\n");
 }
 
-export default function OfferWizard({ className }: { className?: string }) {
-  const [step, setStep] = useState<Step>(1);
+export default function OfferWizard({
+  className,
+  prefill,
+}: {
+  className?: string;
+  prefill?: OfferPrefill;
+}) {
+  // A prefilled wizard opens on the contact step: steps 1–3 are already
+  // answered, and re-asking them is the friction the hand-off exists to remove.
+  const [step, setStep] = useState<Step>(prefill ? 4 : 1);
   const [direction, setDirection] = useState(1);
-  const [data, setData] = useState<OfferData>(INITIAL);
+  const [data, setData] = useState<OfferData>(() =>
+    prefill
+      ? {
+          ...INITIAL,
+          projectType: prefill.projectType,
+          features: prefill.features,
+          budget: prefill.budget,
+          // The calculator says nothing about timing, so this stays the one
+          // question the contact step still owns — and it is optional there.
+          timeline: "",
+        }
+      : INITIAL,
+  );
   const [errors, setErrors] = useState<
     Partial<Record<keyof OfferData, string>>
   >({});
@@ -602,7 +715,7 @@ export default function OfferWizard({ className }: { className?: string }) {
     if (!data.name.trim()) e.name = "Kérlek, add meg a neved.";
     if (!data.email.trim()) e.email = "Kérlek, add meg az e-mail címed.";
     else if (!isEmail(data.email))
-      e.email = "Adj meg egy érvényes e-mail címet.";
+      e.email = "Hiányzik a @ jel. Például: anna@vallalkozas.hu";
     setErrors(e);
     return Object.keys(e).length === 0;
   }
@@ -624,13 +737,14 @@ export default function OfferWizard({ className }: { className?: string }) {
         body: JSON.stringify({
           name: data.name.trim(),
           email: data.email.trim(),
-          message: composeMessage(data),
+          message: composeMessage(data, prefill),
         }),
       });
       if (!res.ok) {
         const json = (await res.json().catch(() => ({}))) as { error?: string };
         setSubmitError(
-          json.error ?? "Nem sikerült elküldeni. Próbáld újra később.",
+          json.error ??
+            "Nem sikerült elküldeni az ajánlatkérést. Addig írj közvetlenül e-mailben:",
         );
         setStatus("error");
         return;
@@ -638,19 +752,29 @@ export default function OfferWizard({ className }: { className?: string }) {
       setStatus("success");
     } catch {
       setSubmitError(
-        "Hálózati hiba. Ellenőrizd a kapcsolatot és próbáld újra.",
+        "Nem érlek el a hálózaton. Ellenőrizd a kapcsolatot, vagy írj közvetlenül e-mailben:",
       );
       setStatus("error");
     }
   }
 
   function reset() {
-    setData(INITIAL);
+    setData(
+      prefill
+        ? {
+            ...INITIAL,
+            projectType: prefill.projectType,
+            features: prefill.features,
+            budget: prefill.budget,
+          }
+        : INITIAL,
+    );
     setErrors({});
     setSubmitError("");
     setStatus("idle");
     setDirection(-1);
-    setStep(1);
+    // A hand-off has no step 1 to return to — the calculator is behind it.
+    setStep(prefill ? 4 : 1);
   }
 
   if (status === "success") {
@@ -698,30 +822,38 @@ export default function OfferWizard({ className }: { className?: string }) {
       <div className="border-b border-border px-6 pb-4 pt-5">
         <div className="flex items-baseline justify-between gap-4">
           <p className="font-mono text-xs uppercase tracking-[0.15em] text-muted-foreground">
-            {step}. lépés / {STEPS_TOTAL}
+            {/* A hand-off from the calculator IS one step. Printing "4. lépés
+                / 4" over a form that opened on its last screen reads as three
+                steps having been skipped, rather than as three having been
+                answered already. */}
+            {prefill ? "Utolsó lépés" : `${step}. lépés / ${STEPS_TOTAL}`}
           </p>
           <p className="font-mono text-[0.65rem] uppercase tracking-[0.15em] text-muted-foreground/60">
             Ajánlatkérés
           </p>
         </div>
-        <div
-          role="progressbar"
-          aria-valuemin={1}
-          aria-valuemax={STEPS_TOTAL}
-          aria-valuenow={step}
-          aria-label="Ajánlatkérés folyamata"
-          className="mt-3 h-1 w-full overflow-hidden rounded-full bg-muted"
-        >
+        {!prefill && (
           <div
-            className="h-full rounded-full bg-primary transition-all duration-500 ease-out"
-            style={{ width: `${(step / STEPS_TOTAL) * 100}%` }}
-          />
-        </div>
+            role="progressbar"
+            aria-valuemin={1}
+            aria-valuemax={STEPS_TOTAL}
+            aria-valuenow={step}
+            aria-label="Ajánlatkérés folyamata"
+            className="mt-3 h-1 w-full overflow-hidden rounded-full bg-muted"
+          >
+            <div
+              className="h-full rounded-full bg-primary transition-all duration-500 ease-out"
+              style={{ width: `${(step / STEPS_TOTAL) * 100}%` }}
+            />
+          </div>
+        )}
         <h3 className="mt-4 font-display text-xl font-medium text-foreground sm:text-2xl">
-          {STEPS[step].title}
+          {prefill ? "Hova küldjem az ajánlatot?" : STEPS[step].title}
         </h3>
         <p className="mt-1 text-sm text-muted-foreground">
-          {STEPS[step].subtitle}
+          {prefill
+            ? "Az összeállításodat változatlanul viszem magammal — egy munkanapon belül jelentkezem az ajánlattal."
+            : STEPS[step].subtitle}
         </p>
       </div>
 
@@ -746,7 +878,12 @@ export default function OfferWizard({ className }: { className?: string }) {
             {step === 2 && <Step2 data={data} onToggle={toggleFeature} />}
             {step === 3 && <Step3 data={data} onChange={updateField} />}
             {step === 4 && (
-              <Step4 data={data} onChange={updateField} errors={errors} />
+              <Step4
+                data={data}
+                onChange={updateField}
+                errors={errors}
+                prefill={prefill}
+              />
             )}
           </motion.div>
         </AnimatePresence>
@@ -756,11 +893,23 @@ export default function OfferWizard({ className }: { className?: string }) {
       <div className="mt-auto border-t border-border px-6 py-4">
         <div aria-live="polite">
           {status === "error" && submitError && (
-            <p className="mb-3 text-sm text-destructive">{submitError}</p>
+            <p className="mb-3 text-sm text-destructive">
+              {submitError}{" "}
+              {/* The message ends in a colon on purpose: a send that failed is
+                  the one moment the direct address is worth more than the
+                  form, so it is offered inline rather than left for the
+                  visitor to scroll back and find. */}
+              <a
+                href="mailto:bence.szalai@icloud.com"
+                className="focus-ember font-semibold underline underline-offset-4"
+              >
+                bence.szalai@icloud.com
+              </a>
+            </p>
           )}
         </div>
         <div className="flex items-center justify-between">
-          {step > 1 ? (
+          {step > 1 && !prefill ? (
             <button
               type="button"
               onClick={() => goTo((step - 1) as Step)}

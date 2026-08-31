@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { CaseStudyCard } from "@/components/case-study/CaseStudyCard";
+import { ManifestoCard } from "@/components/ManifestoCard";
 import Reveal from "@/components/motion/Reveal";
 import { caseStudies } from "@/content/case-studies";
 
@@ -44,9 +45,9 @@ export default function CaseStudyIndexPage() {
               Esettanulmányok
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground md:text-xl">
-              Nem képernyőfotó-galéria. Végigvezetlek azon, milyen megszorítással
-              indult egy projekt, milyen döntéseket kényszerített ki, és mi lett
-              belőle — kóddal és számokkal.
+              Nem képernyőfotó-galéria. Végigvezetlek azon, milyen
+              megszorítással indult egy projekt, milyen döntéseket kényszerített
+              ki, és mi lett belőle — kóddal és számokkal.
             </p>
           </Reveal>
         </div>
@@ -59,6 +60,13 @@ export default function CaseStudyIndexPage() {
               <CaseStudyCard study={study} priority={i === 0} />
             </Reveal>
           ))}
+
+          {/* Mirrors the homepage stack — the two listings are kept identical
+              on purpose, so a reader never finds something in one and not the
+              other. */}
+          <Reveal delay={caseStudies.length * 0.06}>
+            <ManifestoCard />
+          </Reveal>
         </div>
       </section>
     </main>

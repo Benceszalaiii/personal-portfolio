@@ -5,36 +5,52 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useEffect, useRef } from "react";
 
 /*
-  Scroll-driven feature sequence, tuned per device:
+  The three selling points.
 
-  - md+ (desktop/tablet): the section PINS for two extra viewport heights while
-    the three features crossfade in order, scrubbed by scroll. Thin shared
-    progress bars fill as each step plays.
-  - mobile: pinning a tall section fights the mobile URL-bar resize (jumps), so
-    instead the three features stay in normal flow and each RISES + fades in on
-    scroll, with an ember bar wiping across as it settles. A real scroll
-    animation — just one that suits a small screen.
+  The previous version PINNED this section for two extra viewport heights and
+  crossfaded the panels in place. Two problems: scrolling stopped moving the
+  page, which reads as a broken scrollbar, and it showed one point at a time,
+  so the three could never be compared. It also fought the mobile URL-bar
+  resize badly enough to need an entirely separate mobile branch.
 
-  Degradation: the DOM default is all three features stacked and visible. GSAP
-  only touches them inside a matchMedia + motion-OK gate, so reduced-motion,
-  no-JS and crawlers all get the readable list.
+  Now they bank past instead. Each panel enters low, tilted and soft, and
+  resolves to flat and sharp as it crosses the middle of the screen — the way
+  something outside a window resolves as you move past it. Nothing pins,
+  nothing is hijacked, all three coexist on the page, and one code path serves
+  every width.
+
+  Degradation: the DOM ships all three flat, opaque and readable. GSAP only
+  touches them inside a motion-OK media gate, and the animation floors opacity
+  at 0.62 rather than 0, so even a half-applied scrub is legible.
 */
 
+/*
+  Rewritten copy. All three panels broke the same three rules: they stacked
+  quality adjectives instead of facts, sold appearance with no function
+  attached, and one made a claim about the reader's competitors that nothing on
+  the page supports. The middle panel additionally restated its own heading word
+  for word — two lines of type carrying one line of information.
+
+  Every claim below is now checkable from where the reader is standing: the
+  editor is a real Hungarian-language surface, the speed is the speed of the
+  page they are currently on, and the functional examples are the same three
+  trades the hero names.
+
+  The `tag` eyebrows are gone with them. "Rugalmasság / Teljesítmény / Arculat"
+  labelled each panel with the adjective the body was already failing to earn.
+*/
 const features = [
   {
-    tag: "Rugalmasság",
-    heading: "Szerkeszthetőség korlátok nélkül",
-    body: "Nem sablont kapsz: az oldal a te céljaidra épül, a tartalmát pedig magad szerkeszted — fejlesztő nélkül, percek alatt.",
+    heading: "Magad szerkeszted, fejlesztő nélkül",
+    body: "Nem sablont kapsz: az oldal a te céljaidra épül. A szövegeket és a képeket magyar nyelvű felületen írod át, percek alatt.",
   },
   {
-    tag: "Teljesítmény",
-    heading: "Villámgyors, hibátlan működés",
-    body: "Minden eszközön azonnal betölt és hibátlanul fut — az első benyomás már a megnyitás pillanatában eldől.",
+    heading: "Gyorsan tölt, mobilon is",
+    body: "Nem csak asztali gépen, vezetékes neten. Hogy mennyire, azt most mérted le — ezt az oldalt is én építettem.",
   },
   {
-    tag: "Arculat",
-    heading: "Prémium, elegáns megjelenés",
-    body: "Egyedi arculat, átgondolt animációk, letisztult élmény — dizájn, amivel kitűnsz a versenytársaid közül.",
+    heading: "Szép is, és tud is valamit",
+    body: "A dizájn az egyik fele. A másik, hogy a foglalási naptár tényleg foglal és a készlet tényleg stimmel.",
   },
 ];
 
@@ -45,121 +61,68 @@ export default function StackSection() {
     gsap.registerPlugin(ScrollTrigger);
     const ctx = gsap.context(() => {
       const mm = gsap.matchMedia();
-      mm.add(
-        {
-          desktop:
-            "(min-width: 768px) and (prefers-reduced-motion: no-preference)",
-          mobile:
-            "(max-width: 767px) and (prefers-reduced-motion: no-preference)",
-        },
-        (mmCtx) => {
-          const root = sectionRef.current;
-          if (!root) return;
-          const panels = gsap.utils.toArray<HTMLElement>(".feature-panel");
-          if (panels.length === 0) return;
-          const { desktop, mobile } = (mmCtx.conditions ?? {}) as {
-            desktop?: boolean;
-            mobile?: boolean;
-          };
+      mm.add("(prefers-reduced-motion: no-preference)", () => {
+        const panels = gsap.utils.toArray<HTMLElement>(".feature-panel");
+        const wide = window.matchMedia("(min-width: 768px)").matches;
 
-          if (desktop) {
-            // ---- pinned crossfade sequence ----
-            const fills = gsap.utils.toArray<HTMLElement>(".feature-bar-fill");
-            const stage = root.querySelector<HTMLElement>(".feature-stage");
-            const bars = root.querySelector<HTMLElement>(".feature-progress");
-            if (!stage) return;
+        panels.forEach((panel, i) => {
+          // Alternate the bank direction so the sequence has rhythm instead of
+          // three identical entrances — the uniform-reveal tell.
+          const dir = i % 2 === 0 ? 1 : -1;
 
-            // freeze the stage at the tallest panel, then stack the panels
-            const maxH = Math.max(...panels.map((p) => p.offsetHeight));
-            gsap.set(stage, { height: maxH });
-            gsap.set(panels, {
-              position: "absolute",
-              top: 0,
-              left: 0,
-              width: "100%",
-            });
-            gsap.set(panels.slice(1), { autoAlpha: 0, y: 32 });
-            if (bars) gsap.set(bars, { display: "flex" });
-
-            const tl = gsap.timeline({
-              defaults: { ease: "none" },
+          gsap.fromTo(
+            panel,
+            {
+              yPercent: 8,
+              // The opacity floor is 0.62 and the blur 3.5px, not 0 and 7px:
+              // with three tall panels, more than one is mid-animation at any
+              // scroll position, and a harder tuning leaves a whole screen of
+              // unreadable text.
+              autoAlpha: 0.62,
+              scale: 0.97,
+              rotateY: wide ? dir * 10 : 0,
+              rotateX: wide ? 5 : 0,
+              filter: wide ? "blur(3.5px)" : "blur(0px)",
+            },
+            {
+              yPercent: 0,
+              autoAlpha: 1,
+              scale: 1,
+              rotateY: 0,
+              rotateX: 0,
+              filter: "blur(0px)",
+              ease: "none",
               scrollTrigger: {
-                trigger: root,
-                start: "top top",
-                end: "+=200%",
-                pin: true,
-                scrub: true,
-                anticipatePin: 1,
-                invalidateOnRefresh: true,
+                trigger: panel,
+                // Resolves by the time the panel reaches two-thirds up the
+                // screen, so a panel you are actually reading is always sharp.
+                start: "top 88%",
+                end: "top 62%",
+                scrub: 0.6,
               },
-            });
+            },
+          );
 
-            panels.forEach((panel, i) => {
-              const at = i * 1.35;
-              if (i > 0) {
-                tl.to(
-                  panels[i - 1],
-                  { autoAlpha: 0, y: -32, duration: 0.25, ease: "power1.in" },
-                  at - 0.35,
-                );
-                tl.fromTo(
-                  panel,
-                  { autoAlpha: 0, y: 32 },
-                  { autoAlpha: 1, y: 0, duration: 0.25, ease: "power1.out" },
-                  at - 0.1,
-                );
-              }
-              if (fills[i]) {
-                tl.fromTo(
-                  fills[i],
-                  { scaleX: 0 },
-                  { scaleX: 1, duration: 1 },
-                  at + (i === 0 ? 0 : 0.15),
-                );
-              }
-            });
-            // settle hold so the last feature breathes before the pin releases
-            tl.to({}, { duration: 0.4 });
-          }
-
-          if (mobile) {
-            // ---- mobile: rise-and-fade reveal per feature, scrubbed bar ----
-            panels.forEach((panel) => {
-              gsap.from(panel, {
-                y: 44,
-                autoAlpha: 0,
-                duration: 0.7,
-                ease: "power3.out",
+          const bar = panel.querySelector<HTMLElement>(".feature-fill");
+          if (bar) {
+            gsap.fromTo(
+              bar,
+              { scaleX: 0 },
+              {
+                scaleX: 1,
+                ease: "none",
+                transformOrigin: "left",
                 scrollTrigger: {
                   trigger: panel,
                   start: "top 85%",
-                  toggleActions: "play none none reverse",
+                  end: "top 45%",
+                  scrub: true,
                 },
-              });
-              const bar = panel.querySelector<HTMLElement>(
-                ".feature-mobile-fill",
-              );
-              if (bar) {
-                gsap.fromTo(
-                  bar,
-                  { scaleX: 0 },
-                  {
-                    scaleX: 1,
-                    ease: "none",
-                    transformOrigin: "left",
-                    scrollTrigger: {
-                      trigger: panel,
-                      start: "top 80%",
-                      end: "top 45%",
-                      scrub: true,
-                    },
-                  },
-                );
-              }
-            });
+              },
+            );
           }
-        },
-      );
+        });
+      });
     }, sectionRef);
     return () => ctx.revert();
   }, []);
@@ -168,61 +131,48 @@ export default function StackSection() {
     <section
       ref={sectionRef}
       id="features"
-      // z-20: pinning makes this section position:fixed, which forms its own
-      // stacking context — without an explicit z-index the z-10 canvas would
-      // paint over the pinned text.
-      // lg:pl-44: clear the fixed section sidebar (left-4, ~170px wide) so the
-      // centered headline never slides under it on mid-width screens.
-      className="relative z-20 w-full px-4 py-24 md:px-16 lg:pl-44"
+      // The lg sidebar gutter now comes from <main> in page.tsx — one rule for
+      // every section, so none of them can forget it again.
+      className="relative w-full px-4 py-28 md:px-16"
+      style={{ zIndex: "var(--z-content)" }}
     >
-      <div className="relative z-20 mx-auto max-w-6xl">
-        <p className="font-mono text-xs uppercase tracking-[0.2em] text-ember">
-          Amit kínálok
-        </p>
-        <h2 className="mt-4 max-w-[22ch] font-display text-3xl font-medium leading-[1.1] text-foreground md:text-5xl">
-          Ne elégedj meg egy unalmas, szerkeszthetetlen weboldallal.
+      <div className="relative mx-auto max-w-6xl">
+        <h2 className="max-w-[20ch] font-display text-[clamp(1.6rem,1.1rem_+_3.1vw,3.4rem)] font-medium leading-[1.1] text-foreground [hyphens:auto]">
+          Ne érd be egy <span className="text-ember">földhözragadt</span>{" "}
+          weboldallal
         </h2>
 
         {/* stage-features: measured by ScrollScene — the monolith settles in
-            the gutter left of this block on desktop */}
+            the gutter left of this block on desktop. perspective on the
+            container rather than on each panel, so the three share one vanishing
+            point and read as a sequence banking past a single viewer. */}
         <div
           id="stage-features"
-          className="feature-stage relative mx-auto mt-16 flex max-w-3xl flex-col gap-16 md:mt-20"
+          className="relative mx-auto mt-20 flex max-w-3xl flex-col gap-20"
+          style={{ perspective: "1200px" }}
         >
           {features.map((f) => (
-            <article key={f.tag} className="feature-panel">
-              <p className="font-mono text-xs uppercase tracking-[0.2em] text-ember">
-                {f.tag}
-              </p>
-              <h3 className="mt-4 font-display text-3xl font-medium leading-[1.1] text-foreground md:text-5xl">
+            <article
+              key={f.heading}
+              className="feature-panel"
+              style={{ transformStyle: "preserve-3d" }}
+            >
+              <h3 className="font-display text-[clamp(1.6rem,3.4vw,2.6rem)] font-medium leading-[1.1] text-foreground">
                 {f.heading}
               </h3>
               <p className="mt-5 max-w-[58ch] text-lg leading-relaxed text-muted-foreground md:text-xl">
                 {f.body}
               </p>
-              {/* mobile-only per-feature progress bar (md+ uses the shared row) */}
+              {/* Per-panel rule, filled on scrub. It replaces the old shared
+                  progress row, which only existed to report where the pin was
+                  — with nothing pinned there is no shared progress to report. */}
               <span
                 aria-hidden
-                className="mt-6 block h-0.5 w-16 overflow-hidden rounded-full bg-border md:hidden"
+                className="mt-7 block h-0.5 w-24 overflow-hidden rounded-full bg-border"
               >
-                <span className="feature-mobile-fill block h-full w-full origin-left scale-x-0 bg-ember" />
+                <span className="feature-fill block h-full w-full origin-left scale-x-0 bg-ember" />
               </span>
             </article>
-          ))}
-        </div>
-
-        {/* progress: hidden by default, shown only when the pin is active */}
-        <div
-          aria-hidden
-          className="feature-progress mx-auto mt-12 hidden max-w-3xl gap-3"
-        >
-          {features.map((f) => (
-            <span
-              key={f.tag}
-              className="h-0.5 w-12 overflow-hidden rounded-full bg-border"
-            >
-              <span className="feature-bar-fill block h-full w-full origin-left scale-x-0 bg-ember" />
-            </span>
           ))}
         </div>
       </div>

@@ -43,7 +43,7 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative h-svh min-h-[640px] w-full overflow-hidden"
+      className="relative flex min-h-svh w-full items-center overflow-hidden"
     >
       {/* Layer 1: recolored oxblood plasma */}
       <div className="absolute inset-0">
@@ -88,50 +88,137 @@ export default function Hero() {
             "linear-gradient(to bottom, transparent, var(--background))",
         }}
       />
+      {/*
+        Copy scrim. The vignette above is `transparent 24%` at its core — a
+        hole in the middle of the hero — which was correct while the centre of
+        this section was a hand-drawn signature: a graphic tolerates a busy
+        backdrop, and putting the plasma's brightest lobe straight through the
+        mark was the point.
 
-      {/* Copy */}
-      <div className="relative z-20 mx-auto flex h-full max-w-4xl flex-col items-center justify-center px-6 text-center">
-        <p
-          style={step(0)}
-          className="font-mono text-xs uppercase tracking-[0.28em] text-ember sm:text-sm"
-        >
-          Full-stack webfejlesztő
-        </p>
-        {/* Visually the hand-drawn signature; the sr-only text keeps the
-            page's h1 readable for crawlers and screen readers */}
-        <h1 style={step(1)} className="mt-5">
-          <span className="sr-only">Szalai Bence</span>
-          <Signature
-            text="Szalai Bence"
-            color="var(--primary)"
-            fontSize={72}
-            delay={0.3}
-            className="h-auto max-w-full"
-          />
-        </h1>
-        <p
-          style={step(2)}
-          className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground sm:text-xl"
-        >
-          Prémium, egyedi weboldalak, amelyek a vállalkozásodért dolgoznak — a
-          megjelenéstől a betöltési sebességig kézműves minőségben.
-        </p>
-        <div
-          style={step(3)}
-          className="mt-10 flex flex-col items-center gap-4 sm:flex-row"
-        >
-          <Link
-            href="#contact"
-            className="focus-ember inline-flex items-center justify-center rounded-full bg-primary px-7 py-3.5 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/30 transition-all duration-300 hover:shadow-xl hover:shadow-primary/40 hover:brightness-110"
+        It stopped being correct the moment real body copy moved into that
+        hole. --muted-foreground on the plasma's bright lobe does not clear
+        4.5:1, and the mono byline under it is 12px, where it needs 4.5:1 more
+        than anything else on the page.
+
+        So the copy gets its own scrim rather than the whole hero getting
+        darker: a soft ellipse over the text column only, ramping to fully
+        transparent well inside the frame. The plasma still runs bright and
+        uninterrupted through the corners and the lower third, which is where
+        its most legible motion lives anyway.
+      */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 z-[11]"
+        style={{
+          background:
+            "radial-gradient(62% 48% at 50% 50%, color-mix(in oklab, var(--background) 80%, transparent) 0%, color-mix(in oklab, var(--background) 62%, transparent) 52%, transparent 100%)",
+        }}
+      />
+
+      {/* Copy. The section is now a flex container rather than h-svh with an
+          inner h-full column: the fold has to grow when a long Hungarian
+          headline wraps to three lines on a 320px phone, and a hard viewport
+          height clipped it. */}
+      <div className="relative z-20 mx-auto w-full max-w-6xl px-6 pt-28 pb-20 text-center md:px-16">
+        <div className="relative mx-auto max-w-3xl">
+          {/*
+            The headline is the h1 now, and the signature has become the
+            byline underneath it.
+
+            It used to be the other way round: the man's name was set as the
+            hero in a hand-drawn script, and the only sentence saying what he
+            SELLS was the third thing on the page in muted grey. A visiting
+            business does not arrive knowing the name — the headline has to
+            carry the offer, and the signature is worth more as the mark under
+            it than as the pitch itself.
+
+            Sized against the FONT rather than guessed. In Bodoni at 500,
+            "vállalkozásod" is the widest word here and the clamp floor is set
+            so it fits a 320px phone's 272px content box with margin; the 5rem
+            ceiling is reached at ~1138px, where the copy column is max-w-3xl
+            (768px) and still holds it on one line.
+
+            `text-wrap: pretty` rather than the global `balance`: measured on
+            this copy, balance picks a WORSE break here — it hangs the article
+            "a" and widens the longest line — while pretty does the
+            last-line-orphan job the copy actually needs. The opt-out is
+            deliberately local; balance stays the default everywhere else.
+
+            hyphens:auto is the net for the next long compound. Hungarian is
+            agglutinative and this will recur.
+          */}
+          <h1
+            style={step(0)}
+            className="font-display text-[clamp(1.7rem,0.45rem_+_6.4vw,5rem)] font-medium leading-[1.05] text-foreground [hyphens:auto] [text-wrap:pretty]"
           >
-            Beszéljünk a projektedről
-          </Link>
-          <Link
-            href="#about"
-            className="focus-ember inline-flex items-center justify-center rounded-full border border-border px-7 py-3.5 text-sm font-medium text-foreground transition-colors duration-300 hover:border-ember hover:text-ember"
+            Vidd feljebb a vállalkozásod
+          </h1>
+
+          {/*
+            Steps down with the headline. At 320px an 18px subline against a
+            27.7px hero is a 1.54 ratio — too flat to read as hierarchy — so
+            the body starts at 16px and climbs to 20px, keeping the interval
+            near 1.75x or better at every width.
+
+            The copy it replaced was four unbacked quality adjectives —
+            "prémium", "egyedi", "kézműves" — telling the reader the site is
+            good, on a site whose own design principle is "show, don't tell".
+            This names three real functional modules in three real trades, and
+            lands the third in second person so the list turns toward the
+            reader instead of staying a catalogue.
+          */}
+          <p
+            style={step(1)}
+            className="mx-auto mt-7 max-w-[52ch] text-base leading-relaxed text-muted-foreground sm:text-lg lg:text-xl"
           >
-            Ismerj meg közelebbről
-          </Link>
+            Foglalási naptár a fodrászatnak, készletkezelő a boltnak,
+            szerkesztőfelület a blogodnak. Megtervezve és megépítve, egy
+            embertől.
+          </p>
+        </div>
+
+        <div style={step(2)} className="relative z-20 mt-10">
+          {/* The signature, demoted to a byline. It is still the hand-drawn
+              mark — the sr-only name carries the text, the SVG carries none —
+              but at a size where it signs the claim above rather than
+              replacing it. */}
+          <p className="flex flex-col items-center gap-1">
+            <span className="sr-only">Szalai Bence</span>
+            <span aria-hidden="true">
+              <Signature
+                text="Szalai Bence"
+                color="var(--ember)"
+                fontSize={34}
+                delay={0.5}
+                /*
+                  Negative margin on the TOP only. Signature's glyph box is
+                  ~3x the font size and most of that is air, so pulling it up
+                  under the subline costs nothing — but the descenders of
+                  "Szalai Bence" run to within ~12px of the box floor, and a
+                  symmetric -my-4 dragged the mono byline straight through
+                  them. Measured at 1440px: the SVG box ended at y 633.7 and
+                  the byline started at 621.7.
+                */
+                className="-mt-5 h-auto max-w-full"
+              />
+            </span>
+            <span className="font-mono text-xs uppercase tracking-[0.24em] text-muted-foreground">
+              Full-stack webfejlesztő
+            </span>
+          </p>
+
+          {/* ONE CTA. The ghost "Ismerj meg közelebbről" is gone deliberately:
+              the fold asks exactly one question, and a second button of equal
+              size splits the only decision this section wants. Rólam is still
+              one click away in the rail nav, so no path is lost. */}
+          <div className="mt-7 flex justify-center">
+            <Link
+              href="#contact"
+              className="focus-ember inline-flex items-center justify-center rounded-full bg-primary px-8 py-4 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/30 transition-all duration-300 hover:shadow-xl hover:shadow-primary/40 hover:brightness-110"
+            >
+              Beszéljünk a projektedről
+            </Link>
+          </div>
         </div>
       </div>
 

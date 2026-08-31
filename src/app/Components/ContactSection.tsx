@@ -1,4 +1,4 @@
-"use server"
+"use server";
 import Link from "next/link";
 import Reveal from "@/components/motion/Reveal";
 import OfferWizard from "@/components/OfferWizard";
@@ -9,13 +9,24 @@ export default async function ContactSection() {
       id="contact"
       className="relative w-full px-4 py-24 md:px-16 md:py-32"
     >
-      <div className="relative z-20 mx-auto grid max-w-6xl gap-12 md:grid-cols-[1fr_1.25fr] md:gap-16">
+      {/*
+        The split moved from md to xl. With the sidebar gutter reserved, the 1fr
+        pitch column at 1024px is only ~306px wide — and "árajánlatot." alone
+        needs 479px at the old text-6xl. Even before the gutter this was a coin
+        flip: measured at 1366px the column was 478.9px and the word was 478.9px,
+        i.e. zero margin. Below 1280px the pitch and the wizard each get the full
+        column instead of two cramped ones.
+      */}
+      <div className="relative z-20 mx-auto grid max-w-6xl gap-12 xl:grid-cols-[1fr_1.3fr] xl:gap-16">
         {/* Left: the pitch */}
         <Reveal>
-          <p className="font-mono text-xs uppercase tracking-[0.2em] text-ember">
-            Kapcsolat
-          </p>
-          <h2 className="mt-4 font-display text-4xl font-medium leading-[1.05] text-foreground md:text-6xl">
+          {/*
+            "árajánlatot." costs ~8x the font-size. text-4xl put it 0.6px from
+            clipping in a 288px box at 320px; the 3rem ceiling keeps it inside
+            the 417px pitch column at 1280px, the narrowest width where the
+            two-column split now applies.
+          */}
+          <h2 className="mt-4 font-display text-[clamp(2rem,4vw,3rem)] font-medium leading-[1.05] text-foreground [hyphens:auto]">
             Kérj árajánlatot.
           </h2>
           <p className="mt-6 max-w-md text-lg leading-relaxed text-muted-foreground">

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { CaseStudyCard } from "@/components/case-study/CaseStudyCard";
+import { ManifestoCard } from "@/components/ManifestoCard";
 import Reveal from "@/components/motion/Reveal";
 import { caseStudies } from "@/content/case-studies";
 
@@ -23,11 +24,16 @@ export default function WorkSection() {
     >
       <div className="mx-auto max-w-5xl">
         <Reveal>
-          <p className="font-mono text-xs uppercase tracking-[0.2em] text-ember">
-            Munkáim
-          </p>
-          <h2 className="mt-4 max-w-[18ch] font-display text-3xl font-medium leading-[1.1] text-foreground md:text-5xl">
-            Nem lista, hanem indoklás
+          {/*
+            The eyebrow is gone: it read "Munkáim" directly above a heading and
+            a rail label that both already say so. The clamp floor is sized for
+            a ~10.8x-font-size word — at text-3xl (30px) the previous heading
+            needed 324.5px of line in a 288px box at 320px, so it ran 20.5px
+            past the right edge of the phone. Floor: 320px -> 0.4rem + 5.5vw =
+            24px. Leave it as the budget any future heading here has to fit.
+          */}
+          <h2 className="mt-4 max-w-[18ch] font-display text-[clamp(1.5rem,0.4rem_+_5.5vw,3rem)] font-medium leading-[1.1] text-foreground [hyphens:auto]">
+            Nem mutatok olyat, amit ne tudnál megnyitni.
           </h2>
           <p className="mt-5 max-w-2xl text-lg leading-relaxed text-muted-foreground">
             Minden projekt mögött döntések állnak. Megmutatom, milyen
@@ -42,6 +48,14 @@ export default function WorkSection() {
               <CaseStudyCard study={study} />
             </Reveal>
           ))}
+
+          {/* Last, and outside the registry on purpose. The poem is not a case
+              study — no client, no constraint, no numbers — but it is the most
+              complete thing on this page to open, so it belongs in the proof
+              and not buried in the footer. */}
+          <Reveal delay={caseStudies.length * 0.06}>
+            <ManifestoCard />
+          </Reveal>
         </div>
 
         {/* Only worth a "see all" once there is more than what is shown here */}

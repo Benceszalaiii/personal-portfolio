@@ -4,21 +4,17 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
-import {
-  MorphingDialog,
-  MorphingDialogClose,
-  MorphingDialogContainer,
-  MorphingDialogContent,
-  MorphingDialogImage,
-  MorphingDialogTrigger,
-} from "@/components/ui/morphing-dialog";
 
 /*
-  Rólam. One orchestrated entrance (masked headline rise + staggered copy +
-  portrait arrival) and a slow portrait parallax while the section scrolls.
-  All tweens are gsap.from/gsap.to inside a reduced-motion matchMedia gate,
-  so the DOM default stays fully visible for no-JS, crawlers and
+  Rólam. One orchestrated entrance: a masked headline rise and a staggered
+  fade-up through the copy. All tweens sit inside a reduced-motion matchMedia
+  gate, so the DOM default stays fully visible for no-JS, crawlers and
   prefers-reduced-motion.
+
+  The portrait is gone, and with it the parallax and the zoom dialog it needed.
+  The right column is now the ScrollScene stage (#stage-about) with nothing in
+  it but the monolith settling there — which is what that column was measured
+  for in poses.ts all along, and what it now actually shows.
 */
 export default function AboutSection() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -46,25 +42,6 @@ export default function AboutSection() {
           ease: "power3.out",
           scrollTrigger: { trigger: root, start: "top 70%" },
         });
-        gsap.from(".about-portrait", {
-          y: 48,
-          opacity: 0,
-          scale: 0.96,
-          duration: 1,
-          ease: "power3.out",
-          scrollTrigger: { trigger: root, start: "top 65%" },
-        });
-        // gentle drift — the portrait scrolls a touch slower than the copy
-        gsap.to(".about-portrait", {
-          yPercent: -6,
-          ease: "none",
-          scrollTrigger: {
-            trigger: root,
-            start: "top bottom",
-            end: "bottom top",
-            scrub: true,
-          },
-        });
       });
     }, sectionRef);
     return () => ctx.revert();
@@ -81,7 +58,14 @@ export default function AboutSection() {
           <p className="about-fade font-mono text-xs uppercase tracking-[0.2em] text-ember">
             Rólam
           </p>
-          <h2 className="mt-4 font-display text-4xl font-medium leading-[1.05] text-foreground md:text-6xl">
+          {/*
+            Fluid rather than text-4xl/text-6xl. With the rail gutter reserved,
+            this is a 1.3fr column of a max-w-6xl grid — at 1024px it measures
+            ~398px, and the md jump straight from 36px to 60px broke the man's
+            own name across two lines at every width below ~1330px. The clamp
+            reaches full size only where the column can hold it.
+          */}
+          <h2 className="mt-4 font-display text-[clamp(2rem,4.4vw,3.75rem)] font-medium leading-[1.05] text-foreground [hyphens:auto]">
             {/* outer span masks the rise; padding keeps descenders unclipped */}
             <span className="-mb-[0.12em] block overflow-hidden pb-[0.12em]">
               <span className="about-rise block">Szalai Bence</span>
@@ -91,12 +75,17 @@ export default function AboutSection() {
             Full-stack webfejlesztő · Győr
           </p>
           <div className="mt-7 max-w-[60ch] space-y-4 text-lg leading-relaxed text-muted-foreground">
+            {/* "kézműves igényességű munka" was the same unbacked quality
+                adjective the hero and StackSection were carrying. Replaced with
+                what the work actually does, which is also the site's
+                positioning: not presence, but the software a business runs on. */}
             <p className="about-fade">
-              16 éves korom óta építek weboldalakat — ami hobbiként indult, mára{" "}
+              16 éves korom óta építek weboldalakat. Ami hobbiként indult, ma
+              már{" "}
               <span className="font-medium text-ember">
-                vállalkozások online jelenlétét
+                vállalkozások napi működését
               </span>{" "}
-              hordozó, kézműves igényességű munkává érett.
+              viszi — foglalást, készletet, tartalmat.
             </p>
             <p className="about-fade">
               Nálam nincs ügynökségi futószalag: az első vázlattól az élesítésig{" "}
@@ -106,9 +95,19 @@ export default function AboutSection() {
               . Gyors visszajelzés, átlátható folyamat — és egy fejlesztő,
               akinek a te projekted a fő projekt.
             </p>
+            {/* "hamarosan" was doing real damage here: it talked down a
+                finished case study that renders on this same page. Naming the
+                work instead. */}
             <p className="about-fade">
-              A referenciáim hamarosan itt is helyet kapnak — addig is
-              megtalálod a munkáimat a{" "}
+              Egy munkám írásban is megvan: a{" "}
+              <Link
+                href="/esettanulmany/nyaralashasonlito"
+                className="font-medium text-foreground underline decoration-ember/50 underline-offset-4 transition-colors hover:text-ember"
+              >
+                Nyaraláshasonlító
+              </Link>{" "}
+              — hogy indult, mit kellett eldönteni, mi lett belőle. A többit
+              megtalálod a{" "}
               <Link
                 href="https://github.com/benceszalaiii"
                 target="_blank"
@@ -122,35 +121,20 @@ export default function AboutSection() {
           </div>
         </div>
 
-        {/* stage-about: measured by ScrollScene — the monolith settles beside it */}
-        <div id="stage-about" className="mx-auto w-full max-w-xs md:mx-0">
-          <div className="about-portrait">
-            <MorphingDialog>
-              <MorphingDialogTrigger>
-                <div className="group relative cursor-zoom-in overflow-hidden rounded-2xl border border-border bg-card p-2 transition-colors duration-300 hover:border-ember/60">
-                  <MorphingDialogImage
-                    src="/picture.jpeg"
-                    className="aspect-4/5 w-full rounded-xl transition-transform duration-500 ease-out group-hover:scale-[1.03]"
-                    alt="Szalai Bence portré"
-                  />
-                </div>
-              </MorphingDialogTrigger>
-              <MorphingDialogContainer>
-                <MorphingDialogContent className="max-w-md border border-border bg-card">
-                  <MorphingDialogClose />
-                  <MorphingDialogImage
-                    src="/picture.jpeg"
-                    className="w-full rounded-lg"
-                    alt="Szalai Bence portré"
-                  />
-                </MorphingDialogContent>
-              </MorphingDialogContainer>
-            </MorphingDialog>
-            <p className="mt-3 text-center font-mono text-xs uppercase tracking-[0.15em] text-muted-foreground/80 md:text-left">
-              Győr, Magyarország
-            </p>
-          </div>
-        </div>
+        {/*
+          stage-about: measured by ScrollScene — the monolith comes to rest
+          here. It is an EMPTY box on purpose, and it has to keep a height:
+          the canvas is a fixed sibling layer that positions itself against
+          this element's rect, so a zero-height div would collapse the pose to
+          the top of the section. aspect-[4/5] preserves the footprint the
+          portrait used to occupy, which is the ratio poses.ts was tuned
+          against.
+        */}
+        <div
+          id="stage-about"
+          aria-hidden
+          className="mx-auto hidden aspect-[4/5] w-full max-w-xs md:mx-0 md:block"
+        />
       </div>
     </section>
   );

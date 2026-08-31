@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import { Bodoni_Moda, Geist, Geist_Mono } from "next/font/google";
-import Link from "next/link";
 import "./globals.css";
+import SiteFooter from "@/components/SiteFooter";
 import SiteNav from "@/components/SiteNav";
-import FooterLaser from "./Components/FooterLaser";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,8 +27,10 @@ const bodoni = Bodoni_Moda({
 
 export const metadata: Metadata = {
   title: "Szalai Bence — Full-stack webfejlesztő",
+  // The first copy anyone reads is the search result, so it follows the same
+  // rule as every other surface: named functions in real trades, not adjectives.
   description:
-    "Egyedi, prémium weboldalak vállalkozásoknak. Szalai Bence full-stack webfejlesztő portfóliója.",
+    "Foglalási naptár a fodrászatnak, készletkezelő a boltnak, szerkesztőfelület a blogodnak — weboldal, ami dolgozik is. Szalai Bence, full-stack webfejlesztő, Győr.",
 };
 
 export default function RootLayout({
@@ -42,40 +43,22 @@ export default function RootLayout({
       lang="hu"
       className={`${geistSans.variable} ${geistMono.variable} ${bodoni.variable} dark h-full antialiased`}
     >
-      <head>
-        <script
-          async
-          crossOrigin="anonymous"
-          src="https://tweakcn.com/live-preview.min.js"
-        />
-      </head>
+      {/*
+        The tweakcn live-preview script used to load here. It is a theme-EDITOR
+        hook — it lets tweakcn.com push palettes into the running page — and it
+        was shipping to every visitor, along with the blue :root/.dark blocks it
+        had pasted at the end of globals.css. Those blocks came after the
+        oxblood ones at equal specificity, so they won: the site rendered blue
+        while every comment in globals.css, the WebGL rigs and PRODUCT.md
+        described oxblood on charcoal. Both are gone. Re-add this tag
+        temporarily if you want to edit the palette on tweakcn again.
+      */}
       <body className="min-h-full w-full font-sans selection:bg-primary/35 selection:text-foreground">
         <SiteNav />
         {children}
-        <FooterLaser />
-        <footer className="relative border-gradient-t w-full bg-background">
-          <div className="mx-auto flex w-full max-w-6xl flex-col items-center justify-between gap-4 px-6 py-8 sm:flex-row">
-            <p className="font-display text-lg tracking-tight text-foreground">
-              Szalai Bence
-            </p>
-            <nav className="flex items-center gap-6 font-mono text-xs uppercase tracking-[0.15em] text-muted-foreground">
-              <Link
-                href="https://github.com/benceszalaiii"
-                target="_blank"
-                rel="noreferrer"
-                className="transition-colors hover:text-ember"
-              >
-                GitHub
-              </Link>
-              <a href="#contact" className="transition-colors hover:text-ember">
-                Kapcsolat
-              </a>
-            </nav>
-            <p className="font-mono text-xs text-muted-foreground">
-              © {new Date().getFullYear()} Szalai Bence
-            </p>
-          </div>
-        </footer>
+        {/* Route-aware: the calculator locks itself to one viewport on desktop
+            and the footer stands down there. See components/SiteFooter. */}
+        <SiteFooter />
       </body>
     </html>
   );

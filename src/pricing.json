@@ -1,0 +1,370 @@
+{
+  "sections": [
+    {
+      "name": "Alapvető szolgáltatások",
+      "type": "selected",
+      "description": "Ezek a szolgáltatások minden weboldalhoz járnak, amit készítek.",
+      "items": [
+        {
+          "id": "responsive",
+          "name": "Mobilbarát kialakítás",
+          "base": true,
+          "price": 0,
+          "description": "A weboldal minden eszközön jól néz ki, legyen az asztali számítógép, tablet vagy mobiltelefon.",
+          "needs": [],
+          "includes": []
+        },
+        {
+          "id": "seo",
+          "name": "SEO optimalizálás",
+          "price": 0,
+          "base": true,
+          "description": "A weboldal keresőbarát, így könnyebb megtalálni a Google és más keresők által.",
+          "needs": [],
+          "includes": []
+        },
+        {
+          "id": "performance",
+          "name": "Teljesítmény optimalizálás",
+          "base": true,
+          "price": 0,
+          "description": "A weboldal gyorsan betöltődik, így a látogatók nem hagyják el a weboldalt a lassú betöltés miatt.",
+          "needs": [],
+          "includes": []
+        },
+        {
+          "id": "maintenance-3mo",
+          "name": "3 hónap ingyenes karbantartás",
+          "base": true,
+          "price": 0,
+          "description": "A weboldal elkészítése után 3 hónapig ingyenes karbantartást biztosítok, hogy a weboldal mindig naprakész legyen.",
+          "needs": [],
+          "includes": []
+        }
+      ]
+    },
+    {
+      "name": "Alapcsomagok",
+      "type": "select",
+      "description": "Válassz a különböző csomagok közül, amelyek a vállalkozásod igényeihez igazodnak.",
+      "items": [
+        {
+          "id": "landing",
+          "name": "Landing page",
+          "description": "Egyszerű, egyoldalas weboldal, amely bemutatja a vállalkozásodat és szolgáltatásaidat. Kapcsolatfelvételi űrlappal (E-mailes értesítésekkel) és alapvető SEO-val.",
+          "price": 50000,
+          "needs": ["vercel"],
+          "includes": [
+            "responsive",
+            "seo",
+            "performance",
+            "contact-form",
+            "maintenance-3mo"
+          ]
+        },
+        {
+          "id": "cms",
+          "name": "Többoldalas weboldal CMS-sel",
+          "description": "Egyedi CMS megoldás, amely lehetővé teszi a tartalom könnyű kezelését. Többoldalas weboldal, amely bemutatja a vállalkozásodat és szolgáltatásaidat. Kapcsolatfelvételi űrlappal (E-mailes értesítésekkel) és alapvető SEO-val.",
+          "price": 300000,
+          "needs": ["postgres", "s3", "vercel"],
+          "includes": [
+            "responsive",
+            "seo",
+            "performance",
+            "contact-form",
+            "maintenance-3mo",
+            "custom-cms"
+          ]
+        },
+        {
+          "id": "booking",
+          "name": "Időpontfoglaló rendszer",
+          "description": "Egyedi időpontfoglaló rendszer, ahol te kezelheted a beosztásodat, és a felhasználók könnyen foglalhatnak időpontot.",
+          "needs": ["postgres", "google-oauth", "vercel"],
+          "price": 150000,
+          "includes": [
+            "responsive",
+            "seo",
+            "performance",
+            "maintenance-3mo",
+            "auth-google",
+            "booking-system"
+          ]
+        },
+        {
+          "id": "custom",
+          "name": "Egyedi weboldal",
+          "description": "Ha egyik csomag sem felel meg az igényeidnek, készítek egy teljesen egyedi weboldalt, amely a vállalkozásod igényeihez igazodik. Kérlek, válaszd ezt a csomagot, ha egyedi igényeid vannak, és szeretnél egy személyre szabott árajánlatot kapni.",
+          "price": 300000,
+          "needs": ["vercel"],
+          "includes": ["responsive", "seo", "performance", "maintenance-3mo"]
+        }
+      ]
+    },
+    {
+      "name": "Tárhely és domain",
+      "type": "checkbox",
+      "description": "Ezek a szolgáltatások nem tartoznak az alapcsomagokhoz, de hasznosak lehetnek a weboldaladhoz.",
+      "items": [
+        {
+          "id": "domain",
+          "name": "Domain regisztráció",
+          "description": "Segítek a megfelelő domain név kiválasztásában és regisztrálásában. Az ár nem tartalmazza a domain regisztráció díját, ami általában évente 2 000-10 000 Ft között mozog.",
+          "price": 0,
+          "needs": [],
+          "includes": []
+        },
+        {
+          "id": "backend",
+          "name": "Backend",
+          "description": "A weboldaladhoz szükséges backend szolgáltatások, mint például adatbázis, tárhely és szerveroldali logika.",
+          "price": 25000,
+          "monthly": 10000,
+          "needs": [],
+          "includes": ["postgres", "s3"]
+        },
+        {
+          "id": "vercel",
+          "name": "Vercel webszerver",
+          "description": "A weboldaladhoz szükséges webszerver, amely gyors és megbízható. A Vercel a Next.js hivatalos hosztja, így a weboldalad mindig naprakész lesz.",
+          "price": 0,
+          "monthly": 0,
+          "base": true,
+          "note": "A Vercel ingyenes csomagja is elegendő lehet a legtöbb weboldalhoz, de ha nagyobb forgalmat vársz, érdemes lehet a fizetős csomagot választani, ami havi 25$.",
+          "needs": [],
+          "includes": ["vercel-analytics"]
+        },
+        {
+          "id": "email-server",
+          "name": "Email szerver",
+          "description": "A weboldaladhoz szükséges email szerver, amely lehetővé teszi a weboldaladhoz kapcsolódó email címek létrehozását és kezelését. 50 000 email/hónapig ingyenes, utána 10 000 Ft/hó.",
+          "price": 15000,
+          "monthly": 0,
+          "needs": [],
+          "includes": []
+        }
+      ]
+    },
+    {
+      "name": "Dizájn",
+      "type": "select",
+      "description": "Ezek a szolgáltatások a weboldalad dizájnjához kapcsolódnak, és segítenek abban, hogy a weboldalad egyedi és professzionális legyen. Az összes dizájn szolgáltatás tartalmazza az akadálymentesítést.",
+      "items": [
+        {
+          "id": "design-provided",
+          "name": "Hozd a saját dizájnodat",
+          "description": "Ha már van egy kész dizájnod, amit szeretnél használni a weboldaladhoz, akkor ezt a szolgáltatást választhatod. Az ár a dizájn bonyolultságától függően változhat.",
+          "price": 25000,
+          "needs": [],
+          "includes": []
+        },
+        {
+          "id": "design-custom",
+          "name": "Egyedi dizájn",
+          "description": "Egyedi dizájn készítése a weboldaladhoz, amely a vállalkozásod arculatához igazodik. Az ár a dizájn bonyolultságától függően változhat.",
+          "price": 35000,
+          "needs": [],
+          "includes": ["responsive"]
+        },
+        {
+          "id": "design-3d",
+          "name": "3D grafika",
+          "description": "3D grafika készítése a weboldaladhoz, amely egyedi és látványos megjelenést biztosít. Az ár a grafika bonyolultságától függően változhat.",
+          "price": 50000,
+          "needs": [],
+          "includes": []
+        }
+      ]
+    },
+    {
+      "name": "Biztonság",
+      "description": "Ezek a szolgáltatások a weboldalad biztonságához kapcsolódnak, és segítenek abban, hogy a weboldalad védve legyen a támadásoktól és a rosszindulatú szoftverektől.",
+      "type": "checkbox",
+      "items": [
+        {
+          "id": "ssl",
+          "name": "SSL tanúsítvány",
+          "description": "Az SSL tanúsítvány biztosítja, hogy a weboldalad biztonságos legyen, és a látogatók adatai védve legyenek. Az ár a tanúsítvány típusától függően változhat.",
+          "price": 0,
+          "base": true,
+          "needs": ["vercel"],
+          "includes": []
+        },
+        {
+          "id": "auth-email",
+          "name": "E-mail/jelszó bejelentkezés",
+          "description": "Biztonságos, titkosított bejelentkezés, az opciók között a legkevésbé kényelmes és biztonságosabb megoldás.",
+          "price": 15000,
+          "needs": ["postgres"],
+          "includes": []
+        },
+        {
+          "id": "auth-google",
+          "name": "Google OAuth bejelentkezés",
+          "description": "Google alapú bejelentkezés a felhasználóid számára, amely kényelmes és biztonságos megoldás.",
+          "price": 25000,
+          "needs": ["postgres", "google-oauth"],
+          "includes": []
+        },
+        {
+          "id": "auth-magic",
+          "name": "Magic-link bejelentkezés",
+          "description": "Bejelentkezéshez csak az email címük kell, és a rendszer küld egy egyszer használatos linket a bejelentkezéshez. Kevésbé kényelmes mint a Google OAuth, de biztonságosabb, mint az e-mail/jelszó bejelentkezés.",
+          "price": 20000,
+          "needs": ["postgres"],
+          "includes": []
+        }
+      ]
+    },
+    {
+      "name": "Analitika és marketing",
+      "description": "Ezek a szolgáltatások a weboldalad analitikájához és marketingjéhez kapcsolódnak, és segítenek abban, hogy a weboldalad hatékonyan működjön és elérje a célközönségét.",
+      "type": "checkbox",
+      "items": [
+        {
+          "id": "analytics-google",
+          "name": "Google Analytics",
+          "description": "A Google Analytics segítségével nyomon követheted a weboldalad látogatottságát, a felhasználói viselkedést és a konverziókat.",
+          "price": 0,
+          "needs": [],
+          "includes": []
+        },
+        {
+          "id": "tag-manager",
+          "name": "Google Tag Manager",
+          "description": "A Google Tag Manager segítségével könnyen kezelheted a weboldaladhoz kapcsolódó marketing és analitikai címkéket.",
+          "price": 0,
+          "needs": [],
+          "includes": []
+        },
+        {
+          "id": "vercel-analytics",
+          "name": "Vercel Analytics",
+          "description": "Tökéletes opció ha alap statisztikákat szeretnél látni, mint például a látogatók száma.",
+          "price": 0,
+          "base": true,
+          "needs": ["vercel"],
+          "includes": []
+        }
+      ]
+    },
+    {
+      "name": "További szolgáltatások",
+      "type": "checkbox",
+      "description": "Ezek a szolgáltatások nem tartoznak az alapcsomagokhoz, de hasznosak lehetnek a weboldaladhoz.",
+      "items": [
+        {
+          "id": "maintenance-1y",
+          "name": "1 év karbantartás",
+          "description": "A karbantartás magában foglalja a biztonsági frissítéseket, a hibajavításokat és a tartalom frissítését. Az ár a karbantartás bonyolultságától függően változhat.",
+          "price": 0,
+          "monthly": 10000,
+          "needs": [],
+          "includes": []
+        },
+        {
+          "id": "multilingual",
+          "name": "Többnyelvű weboldal",
+          "description": "A weboldalad több nyelven is elérhető lesz, így szélesebb közönséget érhetsz el. Az ár nyelvenként értendő.",
+          "price": 20000,
+          "currency": "Ft/nyelv",
+          "needs": [],
+          "includes": []
+        },
+        {
+          "id": "dark-mode",
+          "name": "Világos/sötét mód",
+          "description": "A weboldaladon a felhasználók választhatnak a világos és sötét mód között, ami kényelmesebbé teszi a böngészést.",
+          "price": 10000,
+          "needs": [],
+          "includes": []
+        },
+        {
+          "id": "product-photography",
+          "name": "Termékfotózás az oldalhoz",
+          "description": "Ha a weboldaladhoz szükséged van termékfotókra, akkor ezt a szolgáltatást választhatod. Az ár a fotózás bonyolultságától függően változhat.",
+          "price": 50000,
+          "needs": [],
+          "includes": []
+        }
+      ]
+    }
+  ],
+  "dependencies": {
+    "postgres": {
+      "name": "Postgres adatbázis",
+      "name_hu": "Postgres adatbázis",
+      "description": "Supabase Postgres adatbázis a dinamikus tartalomhoz",
+      "provided_by": "backend"
+    },
+    "s3": {
+      "name": "S3 tárhely",
+      "name_hu": "S3 tárhely",
+      "description": "Supabase S3 tárhely képek és fájlok tárolásához",
+      "provided_by": "backend"
+    },
+    "vercel": {
+      "name": "Vercel hosting",
+      "name_hu": "Vercel tárhely",
+      "description": "Vercel webszerver és deployment",
+      "provided_by": "vercel"
+    },
+    "google-oauth": {
+      "name": "Google OAuth",
+      "name_hu": "Google OAuth",
+      "description": "Google bejelentkezés engedélyezés",
+      "provided_by": "auth-google"
+    },
+    "contact-form": {
+      "name": "Kapcsolat űrlap",
+      "name_hu": "Kapcsolat űrlap",
+      "description": "E-mailes értesítésekkel ellátott kapcsolatfelvételi űrlap",
+      "provided_by": "landing"
+    },
+    "custom-cms": {
+      "name": "Egyedi CMS",
+      "name_hu": "Egyedi CMS",
+      "description": "Payload CMS alapú tartalomkezelő",
+      "provided_by": "cms"
+    },
+    "booking-system": {
+      "name": "Időpontfoglaló rendszer",
+      "name_hu": "Időpontfoglaló rendszer",
+      "description": "Egyedi időpontfoglaló funkcionalitás",
+      "provided_by": "booking"
+    }
+  },
+  "validation_rules": [
+    {
+      "rule": "SSL requires Vercel",
+      "rule_hu": "SSL tanúsítvány Vercelt igényel",
+      "if_selected": "ssl",
+      "requires": ["vercel"]
+    },
+    {
+      "rule": "Auth requires Postgres",
+      "rule_hu": "Bejelentkezés Postgres adatbázist igényel",
+      "if_selected": ["auth-email", "auth-google", "auth-magic"],
+      "requires": ["postgres"]
+    },
+    {
+      "rule": "Google OAuth requires Google OAuth setup",
+      "rule_hu": "Google OAuth bejelentkezés Google OAuth beállítást igényel",
+      "if_selected": "auth-google",
+      "requires": ["google-oauth"]
+    },
+    {
+      "rule": "CMS requires backend",
+      "rule_hu": "CMS backend szolgáltatást igényel",
+      "if_selected": "cms",
+      "requires": ["backend"]
+    },
+    {
+      "rule": "Booking requires backend",
+      "rule_hu": "Időpontfoglaló backend szolgáltatást igényel",
+      "if_selected": "booking",
+      "requires": ["backend"]
+    }
+  ]
+}
