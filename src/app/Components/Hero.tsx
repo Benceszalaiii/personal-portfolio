@@ -43,7 +43,41 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative flex min-h-svh w-full items-center overflow-hidden"
+      /*
+        The hero owns its horizontal padding, and owns it SYMMETRICALLY.
+
+        Every other section inherits a left-only gutter from <main>
+        (`lg:[&>*]:pl-48`) so the fixed nav rail never prints through
+        left-aligned copy. This section is the one composition on the page that
+        is centred on the VIEWPORT rather than on a text column: the plasma, the
+        radial core glow, the copy scrim and the traveling monolith are all
+        drawn at 50%. A left-only gutter shifts the type by half of itself —
+        measured at 1440px, the copy centre sat at 816px against a viewport
+        centre of 720px, so the headline read 96px right of the glow it is
+        supposed to be sitting inside. The scroll hint below was off by the same
+        96px for the same reason.
+
+        So the gutter is MIRRORED rather than removed. Removing it (the `pl-0!`
+        opt-out TechLoop uses) re-centres the copy but stops reserving anything:
+        at 1024px a centred max-w-3xl column starts at x=128, and the rail
+        reaches 143px — measured, not assumed: the <aside> box ends at 131px and
+        SiteNav passes `maxShift={12}` to LineSidebar's proximity transform.
+        That is a collision, invisible today only because this particular
+        headline does not fill its box.
+
+        The mirror is the parent's own 192px, not a value cut to fit 143px. Two
+        reasons. A 1px margin is not a margin — sizing to the measurement means
+        the next rail font-size bump collides silently. And one number shared
+        with <main> is one number to keep true, which is the whole reason the
+        gutter stopped being per-section. It costs nothing here: at 1024px the
+        column is still 640px against a widest headline line of 488px, because
+        Bodoni sets far narrower than the display face this composition was
+        first drawn against.
+
+        `!` because `[&>*]:pl-48` on the parent resolves at (0,2,0) and would
+        otherwise win.
+      */
+      className="relative flex min-h-svh w-full items-center overflow-hidden px-6 lg:px-48!"
     >
       {/* Layer 1: recolored oxblood plasma */}
       <div className="absolute inset-0">
@@ -119,7 +153,9 @@ export default function Hero() {
           inner h-full column: the fold has to grow when a long Hungarian
           headline wraps to three lines on a 320px phone, and a hard viewport
           height clipped it. */}
-      <div className="relative z-20 mx-auto w-full max-w-6xl px-6 pt-28 pb-20 text-center md:px-16">
+      {/* No padding of its own: the section owns it now, so the two cannot
+          compound and squeeze the column at the width where it is tightest. */}
+      <div className="relative z-20 mx-auto w-full max-w-6xl pt-28 pb-20 text-center">
         <div className="relative mx-auto max-w-3xl">
           {/*
             The headline is the h1 now, and the signature has become the
